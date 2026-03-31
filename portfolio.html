@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Portfolio — Product Designer & UI/UX Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blue-950:#000C2E;--blue-900:#001A5C;--blue-800:#002A8A;
+  --blue-700:#003BB8;--blue-600:#0048E0;--blue-500:#0051FF;
+  --blue-400:#3374FF;--blue-300:#6699FF;--blue-200:#99BBFF;
+  --blue-100:#CCDEFF;--blue-50:#EEF3FF;
+  --font-display:'Syne',sans-serif;--font-mono:'DM Mono',monospace;
+  --font-serif:'Instrument Serif',serif;
+  --radius:4px;--radius-lg:12px;--transition:0.35s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"]{
+  --bg:var(--blue-950);--bg-2:var(--blue-900);--bg-3:var(--blue-800);
+  --surface:rgba(0,26,92,0.55);--border:rgba(51,116,255,0.16);
+  --border-strong:rgba(51,116,255,0.38);--text-primary:var(--blue-50);
+  --text-secondary:var(--blue-200);--text-muted:var(--blue-300);
+  --accent:var(--blue-500);--accent-hover:var(--blue-400);
+  --tag-bg:rgba(0,81,255,0.13);--tag-border:rgba(0,81,255,0.3);
+  --nav-bg:rgba(0,12,46,0.88);--glow:0 0 60px rgba(0,81,255,0.22);
+  --glow-sm:0 0 20px rgba(0,81,255,0.13);
+}
+[data-theme="light"]{
+  --bg:var(--blue-50);--bg-2:#FFFFFF;--bg-3:var(--blue-100);
+  --surface:rgba(255,255,255,0.8);--border:rgba(0,81,255,0.12);
+  --border-strong:rgba(0,81,255,0.28);--text-primary:var(--blue-950);
+  --text-secondary:var(--blue-800);--text-muted:var(--blue-700);
+  --accent:var(--blue-500);--accent-hover:var(--blue-600);
+  --tag-bg:rgba(0,81,255,0.07);--tag-border:rgba(0,81,255,0.2);
+  --nav-bg:rgba(238,243,255,0.92);--glow:0 4px 30px rgba(0,81,255,0.1);
+  --glow-sm:0 2px 12px rgba(0,81,255,0.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text-primary);font-family:var(--font-display);
+  transition:background var(--transition),color var(--transition);
+  overflow-x:hidden;min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.5;
+}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.25;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--nav-bg);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 clamp(1.5rem,5vw,4rem);
+  display:flex;align-items:center;justify-content:space-between;height:64px;
+  transition:background var(--transition),border-color var(--transition);
+}
+.nav-logo{font-size:0.95rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-family:var(--font-mono);cursor:pointer;}
+.nav-links{display:flex;gap:clamp(1rem,2.5vw,2rem);align-items:center;}
+.nav-links a{font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color:var(--text-secondary);text-decoration:none;transition:color var(--transition);cursor:pointer;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.theme-toggle{
+  display:flex;align-items:center;gap:0.5rem;cursor:pointer;
+  background:var(--surface);border:1px solid var(--border-strong);
+  border-radius:30px;padding:0.3rem 0.75rem;transition:all var(--transition);
+}
+.theme-toggle:hover{border-color:var(--accent);}
+.toggle-track{
+  width:36px;height:20px;border-radius:10px;
+  background:var(--blue-800);position:relative;
+  transition:background var(--transition);border:1px solid var(--border-strong);
+}
+[data-theme="light"] .toggle-track{background:var(--blue-200);}
+.toggle-thumb{
+  width:14px;height:14px;border-radius:50%;background:var(--accent);
+  position:absolute;top:2px;left:2px;transition:transform var(--transition);
+}
+[data-theme="light"] .toggle-thumb{transform:translateX(16px);}
+.toggle-label{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);letter-spacing:0.08em;user-select:none;}
+
+/* PAGES */
+.page{display:none;padding-top:64px;min-height:100vh;position:relative;z-index:1;}
+.page.active{display:block;}
+
+/* UTILS */
+.section{padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,4rem);}
+.section-label{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.75rem;}
+.section-label::before{content:'';display:block;width:20px;height:1px;background:var(--accent);}
+.section-title{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.05;color:var(--text-primary);}
+.section-title em{font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);}
+.section-subtitle{font-size:1rem;color:var(--text-secondary);max-width:560px;line-height:1.72;margin-top:1.2rem;}
+.max-w{max-width:1200px;margin-left:auto;margin-right:auto;}
+
+/* HERO */
+#hero{min-height:calc(100vh - 64px);display:grid;place-items:center;padding:4rem clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden;}
+.hero-bg-orb{
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,81,255,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-bg-orb-1{top:-10%;right:-5%;}
+.hero-bg-orb-2{bottom:-15%;left:-8%;opacity:0.6;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:center;max-width:1200px;width:100%;}
+.hero-eyebrow{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.75);}}
+.hero-name{font-size:clamp(3rem,6vw,5.2rem);font-weight:800;line-height:0.95;letter-spacing:-0.02em;color:var(--text-primary);}
+.hero-name span{display:block;font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);font-size:clamp(2.4rem,5vw,4.2rem);}
+.hero-role{margin-top:1.5rem;font-size:0.97rem;color:var(--text-secondary);line-height:1.7;max-width:420px;}
+.hero-ctas{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;}
+.btn-primary{padding:0.82rem 1.9rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:all var(--transition);}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,81,255,0.4);}
+.btn-outline{padding:0.82rem 1.9rem;background:transparent;border:1.5px solid var(--border-strong);border-radius:var(--radius);cursor:pointer;color:var(--text-primary);font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:all var(--transition);}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);}
+.hero-stat-num{font-size:2.1rem;font-weight:800;color:var(--accent);line-height:1;}
+.hero-stat-label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-top:0.35rem;font-family:var(--font-mono);}
+.hero-visual{position:relative;}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;backdrop-filter:blur(20px);box-shadow:var(--glow);}
+.hero-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--blue-700),var(--blue-500));display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:1.5rem;border:3px solid rgba(0,81,255,0.25);}
+.skill-bars{display:flex;flex-direction:column;gap:1rem;margin-top:1.25rem;}
+.skill-bar-label{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--text-secondary);text-transform:uppercase;margin-bottom:0.35rem;display:flex;justify-content:space-between;}
+.skill-bar-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue-600),var(--blue-400));border-radius:2px;animation:fillBar 1.6s ease forwards;}
+@keyframes fillBar{from{width:0}to{width:var(--w)}}
+.floating-badge{position:absolute;background:var(--bg-2);border:1px solid var(--border-strong);border-radius:var(--radius);padding:0.55rem 0.9rem;backdrop-filter:blur(20px);font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);letter-spacing:0.06em;box-shadow:var(--glow-sm);}
+.badge-1{top:-1rem;right:-1.5rem;}
+.badge-2{bottom:3.5rem;left:-2rem;}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.9rem 0;background:var(--bg-2);}
+.marquee-inner{display:flex;gap:2.5rem;animation:marquee 35s linear infinite;width:max-content;}
+.marquee-item{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;display:flex;align-items:center;gap:0.6rem;}
+.marquee-item::before{content:'◆';color:var(--accent);font-size:0.45rem;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:0.7fr 1.3fr;gap:clamp(3rem,5vw,5rem);align-items:start;}
+.about-photo{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,var(--blue-800),var(--blue-950));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:4rem;border:1px solid var(--border);position:relative;overflow:hidden;}
+.about-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 55%,rgba(0,81,255,0.12));}
+.about-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1.25rem;}
+.tag{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;padding:0.32rem 0.7rem;border-radius:20px;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--accent);}
+.about-bio{font-size:1rem;color:var(--text-secondary);line-height:1.8;margin-top:1rem;}
+.about-bio p+p{margin-top:1.1rem;}
+.exp-items{display:flex;flex-direction:column;gap:0;margin-top:2.5rem;}
+.exp-item{padding:1.4rem 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:130px 1fr;gap:1.5rem;}
+.exp-year{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);letter-spacing:0.06em;padding-top:0.15rem;}
+.exp-title{font-size:0.95rem;font-weight:700;color:var(--text-primary);}
+.exp-company{font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.05em;margin-top:0.2rem;}
+.exp-desc{font-size:0.85rem;color:var(--text-secondary);margin-top:0.45rem;line-height:1.65;}
+
+/* WORK */
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;}
+.filter-tabs{display:flex;gap:0.45rem;flex-wrap:wrap;}
+.filter-tab{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.38rem 0.9rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all var(--transition);}
+.filter-tab:hover,.filter-tab.active{background:var(--tag-bg);border-color:var(--accent);color:var(--accent);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all var(--transition);backdrop-filter:blur(12px);position:relative;}
+.project-card:hover{border-color:var(--border-strong);transform:translateY(-4px);box-shadow:var(--glow);}
+.project-card.featured{grid-column:span 2;}
+.project-thumb{height:190px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--blue-800),var(--blue-600));display:flex;align-items:center;justify-content:center;}
+.project-card.featured .project-thumb{height:240px;}
+.project-thumb-icon{font-size:2.8rem;opacity:0.55;position:relative;z-index:1;}
+.project-thumb-lines{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(0,81,255,0.07) 18px,rgba(0,81,255,0.07) 19px);}
+.project-body{padding:1.4rem;}
+.project-category{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;}
+.project-name{font-size:1rem;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:0.45rem;}
+.project-desc{font-size:0.82rem;color:var(--text-secondary);line-height:1.62;}
+.project-meta{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.9rem;padding-top:0.9rem;border-top:1px solid var(--border);}
+.project-tag{font-family:var(--font-mono);font-size:0.6rem;padding:0.22rem 0.55rem;border-radius:3px;background:var(--tag-bg);color:var(--text-muted);letter-spacing:0.05em;}
+.project-arrow{position:absolute;top:0.9rem;right:0.9rem;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.85rem;transition:all var(--transition);opacity:0;}
+.project-card:hover .project-arrow{opacity:1;border-color:var(--accent);color:var(--accent);}
+
+/* CASE STUDIES */
+.case-studies-grid{display:grid;gap:2.5rem;}
+.case-card{display:grid;grid-template-columns:1fr 1.5fr;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);backdrop-filter:blur(12px);transition:all var(--transition);cursor:pointer;}
+.case-card:hover{border-color:var(--border-strong);box-shadow:var(--glow);}
+.case-card:nth-child(even){direction:rtl;}
+.case-card:nth-child(even) .case-body{direction:ltr;}
+.case-visual{background:linear-gradient(145deg,var(--blue-800),var(--blue-950));min-height:340px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.case-visual-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,81,255,0.18) 0%,transparent 65%);}
+.case-visual-inner{text-align:center;position:relative;z-index:1;}
+.case-icon{font-size:3.5rem;margin-bottom:0.9rem;}
+.case-product-label{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-300);}
+.case-body{padding:2.5rem;}
+.case-label{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.65rem;display:flex;align-items:center;gap:0.5rem;}
+.case-label::before{content:'';width:14px;height:1px;background:var(--accent);}
+.case-title{font-size:1.7rem;font-weight:800;color:var(--text-primary);line-height:1.15;margin-bottom:0.4rem;}
+.case-subtitle{font-size:0.82rem;color:var(--text-muted);font-family:var(--font-mono);letter-spacing:0.04em;margin-bottom:1.1rem;}
+.case-desc{font-size:0.88rem;color:var(--text-secondary);line-height:1.75;}
+.case-metrics{display:flex;gap:1.5rem;margin-top:1.5rem;padding-top:1.4rem;border-top:1px solid var(--border);}
+.case-metric-num{font-size:1.4rem;font-weight:800;color:var(--accent);}
+.case-metric-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.2rem;}
+.case-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.1rem;}
+
+/* SKILLS */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.skills-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;backdrop-filter:blur(12px);}
+.skills-group-title{font-size:0.9rem;font-weight:700;color:var(--text-primary);margin-bottom:1.4rem;display:flex;align-items:center;gap:0.75rem;}
+.skills-group-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.skill-item{display:flex;align-items:center;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border);}
+.skill-item:last-child{border-bottom:none;}
+.skill-name{font-size:0.85rem;color:var(--text-secondary);}
+.skill-level{font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.07em;}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.tool-chip{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;backdrop-filter:blur(12px);transition:all var(--transition);}
+.tool-chip:hover{border-color:var(--accent);transform:translateY(-2px);}
+.tool-chip-icon{font-size:1.4rem;margin-bottom:0.4rem;}
+.tool-chip-name{font-size:0.78rem;font-weight:600;color:var(--text-primary);}
+.tool-chip-type{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-muted);margin-top:0.15rem;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.contact-detail{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border);}
+.contact-icon{width:38px;height:38px;border-radius:var(--radius);background:var(--tag-bg);border:1px solid var(--tag-border);display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.contact-label{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.18rem;}
+.contact-value{font-size:0.88rem;color:var(--text-primary);font-weight:500;}
+.contact-form{display:flex;flex-direction:column;gap:0.9rem;}
+.form-group{display:flex;flex-direction:column;gap:0.35rem;}
+.form-label{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);}
+.form-input,.form-textarea{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1rem;color:var(--text-primary);font-family:var(--font-display);font-size:0.88rem;outline:none;transition:border-color var(--transition);backdrop-filter:blur(12px);}
+.form-input:focus,.form-textarea:focus{border-color:var(--accent);}
+.form-textarea{resize:vertical;min-height:115px;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.8rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;background:var(--bg-2);position:relative;z-index:1;}
+.footer-left{font-family:var(--font-mono);font-size:0.67rem;color:var(--text-muted);letter-spacing:0.07em;}
+.footer-right{display:flex;gap:1.5rem;}
+.footer-link{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);text-decoration:none;letter-spacing:0.07em;text-transform:uppercase;transition:color var(--transition);cursor:pointer;}
+.footer-link:hover{color:var(--accent);}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,12,46,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:2rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--bg-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);max-width:680px;width:100%;max-height:85vh;overflow-y:auto;padding:2.5rem;position:relative;animation:modalIn 0.28s ease;}
+@keyframes modalIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
+.modal-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all var(--transition);}
+.modal-close:hover{border-color:var(--accent);color:var(--accent);}
+.modal-product{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+.modal-title{font-size:1.7rem;font-weight:800;color:var(--text-primary);margin-bottom:0.4rem;}
+.modal-sub{font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:1.5rem;}
+.modal-section-title{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.65rem;}
+.modal-text{font-size:0.88rem;color:var(--text-secondary);line-height:1.78;}
+.modal-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.modal-outcome{background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:var(--radius);padding:1rem;text-align:center;}
+.modal-outcome-num{font-size:1.3rem;font-weight:800;color:var(--accent);}
+.modal-outcome-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-muted);margin-top:0.18rem;letter-spacing:0.07em;text-transform:uppercase;}
+
+/* HOME PREVIEW SECTION */
+.preview-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid,.about-grid,.case-card,.contact-grid,.skills-layout{grid-template-columns:1fr;}
+  .case-card:nth-child(even){direction:ltr;}
+  .project-card.featured{grid-column:span 1;}
+  .work-header{flex-direction:column;align-items:flex-start;gap:1.25rem;}
+  .tools-grid{grid-template-columns:repeat(2,1fr);}
+  .nav-links a.hide-sm{display:none;}
+  .preview-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .tools-grid{grid-template-columns:1fr 1fr;}
+  .case-metrics{flex-wrap:wrap;gap:1rem;}
+  .modal-outcomes{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="navigate('home')">PD</div>
+  <div class="nav-links">
+    <a onclick="navigate('home')" id="nav-home" class="active">Home</a>
+    <a onclick="navigate('about')" id="nav-about">About</a>
+    <a onclick="navigate('work')" id="nav-work">Work</a>
+    <a onclick="navigate('cases')" id="nav-cases">Case Studies</a>
+    <a onclick="navigate('skills')" id="nav-skills" class="hide-sm">Skills</a>
+    <a onclick="navigate('contact')" id="nav-contact">Contact</a>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+      <span class="toggle-label" id="themeLabel">Dark</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HOME =================== -->
+<div class="page active" id="page-home">
+  <section id="hero">
+    <div class="hero-bg-orb hero-bg-orb-1"></div>
+    <div class="hero-bg-orb hero-bg-orb-2"></div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow"><span class="pulse-dot"></span>Available for new opportunities</div>
+        <h1 class="hero-name">Product<br>Designer<span>& UI/UX Lead</span></h1>
+        <p class="hero-role">Crafting enterprise digital experiences at the intersection of industrial intelligence and human intuition. Specialised in manufacturing, vision AI and automation systems.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="navigate('work')">View Work</button>
+          <button class="btn-outline" onclick="navigate('contact')">Get in Touch</button>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hero-stat-num">50+</div><div class="hero-stat-label">Projects</div></div>
+          <div><div class="hero-stat-num">7+</div><div class="hero-stat-label">Years Exp.</div></div>
+          <div><div class="hero-stat-num">12+</div><div class="hero-stat-label">Industries</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-badge badge-1">⬡ UI/UX Lead</div>
+        <div class="hero-card">
+          <div class="hero-avatar">RK</div>
+          <div class="section-label" style="margin-bottom:0.4rem;">Core Expertise</div>
+          <div class="skill-bars">
+            <div><div class="skill-bar-label"><span>Product Strategy</span><span>95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:95%"></div></div></div>
+            <div><div class="skill-bar-label"><span>UI/UX Design</span><span>98%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:98%"></div></div></div>
+            <div><div class="skill-bar-label"><span>Vision Systems</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+            <div><div class="skill-bar-label"><span>Industrial IoT</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
+            <div><div class="skill-bar-label"><span>Design Systems</span><span>92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
+          </div>
+        </div>
+        <div class="floating-badge badge-2">◈ 50+ Delivered</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <div class="marquee-item">Traceability FJM</div><div class="marquee-item">Process Management JSW</div><div class="marquee-item">Sequential Production JBM</div><div class="marquee-item">Digital Checksheet</div><div class="marquee-item">Vision Inspection F&B</div><div class="marquee-item">Hole Inspection</div><div class="marquee-item">Bottle Cap Inspection</div><div class="marquee-item">ANPR — Hind Terminals</div><div class="marquee-item">Canteen Management</div><div class="marquee-item">Spark Minda</div><div class="marquee-item">Sanden Vikas</div><div class="marquee-item">Visitor Management</div><div class="marquee-item">CNC Monitoring</div><div class="marquee-item">CMMS Platform</div><div class="marquee-item">MM System</div><div class="marquee-item">EMS Solution</div>
+      <div class="marquee-item">Traceability FJM</div><div class="marquee-item">Process Management JSW</div><div class="marquee-item">Sequential Production JBM</div><div class="marquee-item">Digital Checksheet</div><div class="marquee-item">Vision Inspection F&B</div><div class="marquee-item">Hole Inspection</div><div class="marquee-item">Bottle Cap Inspection</div><div class="marquee-item">ANPR — Hind Terminals</div><div class="marquee-item">Canteen Management</div><div class="marquee-item">Spark Minda</div><div class="marquee-item">Sanden Vikas</div><div class="marquee-item">Visitor Management</div><div class="marquee-item">CNC Monitoring</div><div class="marquee-item">CMMS Platform</div><div class="marquee-item">MM System</div><div class="marquee-item">EMS Solution</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="max-w">
+      <div class="preview-header">
+        <div>
+          <div class="section-label">Selected Work</div>
+          <h2 class="section-title">Enterprise <em>Products</em></h2>
+        </div>
+        <button class="btn-outline" onclick="navigate('work')">All Projects →</button>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card featured fade-in" onclick="navigate('cases')">
+          <div class="project-thumb"><div class="project-thumb-lines"></div><div class="project-thumb-icon">📦</div></div>
+          <div class="project-body">
+            <div class="project-category">Case Study · Enterprise SaaS</div>
+            <div class="project-name">Material Management (MM) Platform</div>
+            <div class="project-desc">End-to-end material flow design for manufacturing floors — from requisition to delivery with real-time tracking and predictive procurement intelligence.</div>
+            <div class="project-meta"><span class="project-tag">Product Design</span><span class="project-tag">Design System</span><span class="project-tag">Dashboard</span></div>
+          </div>
+          <div class="project-arrow">→</div>
+        </div>
+        <div class="project-card fade-in" onclick="navigate('cases')">
+          <div class="project-thumb"><div class="project-thumb-lines"></div><div class="project-thumb-icon">🔧</div></div>
+          <div class="project-body">
+            <div class="project-category">Case Study · CMMS</div>
+            <div class="project-name">Computerised Maintenance Management</div>
+            <div class="project-desc">Proactive maintenance scheduling, asset lifecycle management and work order automation for industrial plants.</div>
+            <div class="project-meta"><span class="project-tag">UX Research</span><span class="project-tag">IoT Integration</span></div>
+          </div>
+          <div class="project-arrow">→</div>
+        </div>
+        <div class="project-card fade-in" onclick="navigate('cases')">
+          <div class="project-thumb" style="background:linear-gradient(135deg,var(--blue-900),var(--blue-700))"><div class="project-thumb-lines"></div><div class="project-thumb-icon">⚡</div></div>
+          <div class="project-body">
+            <div class="project-category">Case Study · Energy</div>
+            <div class="project-name">Energy Management System (EMS)</div>
+            <div class="project-desc">Real-time energy consumption monitoring with anomaly detection, zone-level analytics and sustainability KPI dashboards.</div>
+            <div class="project-meta"><span class="project-tag">Data Viz</span><span class="project-tag">Analytics</span></div>
+          </div>
+          <div class="project-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-left">© 2025 Product Designer & UI/UX Lead · All rights reserved</div>
+    <div class="footer-right"><a class="footer-link" onclick="navigate('work')">Work</a><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- =================== ABOUT =================== -->
+<div class="page" id="page-about">
+  <section class="section">
+    <div class="about-grid max-w">
+      <div>
+        <div class="about-photo fade-in">👤</div>
+        <div class="about-tags fade-in" style="transition-delay:0.1s">
+          <span class="tag">Product Design</span><span class="tag">UI/UX Lead</span><span class="tag">Design Systems</span><span class="tag">Vision AI</span><span class="tag">Industrial IoT</span><span class="tag">Framer</span><span class="tag">Figma</span><span class="tag">Manufacturing</span><span class="tag">Automotive</span><span class="tag">F&B</span>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.12s">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Designing <em>systems</em><br>that think</h2>
+        <div class="about-bio">
+          <p>I'm a Product Designer and UI/UX Lead with 7+ years crafting enterprise-grade digital products for manufacturing, automotive, food & beverage and energy industries. I bridge complex industrial processes with intuitive human interfaces.</p>
+          <p>My work spans pixel-level UI craft to system-wide product strategy — from shop floors and control rooms to executive dashboards — all demanding zero-tolerance for ambiguity and error.</p>
+          <p>Specialised in vision inspection systems, traceability platforms, CMMS, EMS and operational intelligence tools. Every design decision is grounded in how real operators think, move and react under pressure.</p>
+        </div>
+        <div class="exp-items">
+          <div class="exp-item">
+            <div class="exp-year">2021 — Present</div>
+            <div>
+              <div class="exp-title">UI/UX Lead & Product Designer</div>
+              <div class="exp-company">Manufacturing Tech / Industrial SaaS</div>
+              <div class="exp-desc">Leading design for 15+ concurrent enterprise products across automotive, F&B and energy verticals. Building and maintaining multi-brand design systems.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year">2019 — 2021</div>
+            <div>
+              <div class="exp-title">Senior Product Designer</div>
+              <div class="exp-company">Industrial Automation Firm</div>
+              <div class="exp-desc">Designed SCADA-adjacent interfaces, vision system dashboards and real-time monitoring platforms for Tier-1 auto suppliers.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year">2017 — 2019</div>
+            <div>
+              <div class="exp-title">UX Designer</div>
+              <div class="exp-company">Digital Product Studio</div>
+              <div class="exp-desc">Full-spectrum UX: research, wireframing, prototyping and handoff for SaaS and IoT products across multiple domains.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- =================== WORK =================== -->
+<div class="page" id="page-work">
+  <section class="section">
+    <div class="max-w">
+      <div class="work-header fade-in">
+        <div>
+          <div class="section-label">All Projects</div>
+          <h2 class="section-title">50+ <em>Projects</em></h2>
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterProjects('all',this)">All</button>
+          <button class="filter-tab" onclick="filterProjects('vision',this)">Vision AI</button>
+          <button class="filter-tab" onclick="filterProjects('mfg',this)">Manufacturing</button>
+          <button class="filter-tab" onclick="filterProjects('enterprise',this)">Enterprise</button>
+          <button class="filter-tab" onclick="filterProjects('management',this)">Management</button>
+        </div>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- =================== CASE STUDIES =================== -->
+<div class="page" id="page-cases">
+  <section class="section">
+    <div class="max-w">
+      <div class="fade-in" style="margin-bottom:3rem">
+        <div class="section-label">Deep Dives</div>
+        <h2 class="section-title">Case <em>Studies</em></h2>
+        <p class="section-subtitle">Four flagship enterprise products — each representing months of research, iteration and cross-functional collaboration.</p>
+      </div>
+      <div class="case-studies-grid">
+        <div class="case-card fade-in" onclick="openModal('mm')">
+          <div class="case-visual"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">📦</div><div class="case-product-label">MM Platform</div></div></div>
+          <div class="case-body">
+            <div class="case-label">Case Study 01</div>
+            <h3 class="case-title">Material Management System</h3>
+            <div class="case-subtitle">End-to-end supply chain UX for Tier-1 auto suppliers</div>
+            <p class="case-desc">Redesigned the entire material requisition, tracking and delivery experience for a platform managing ₹200Cr+ in daily material flow. Reduced procurement errors by 40% and cut operator task time by 35%.</p>
+            <div class="case-chips"><span class="tag">User Research</span><span class="tag">Information Architecture</span><span class="tag">Design System</span><span class="tag">Usability Testing</span></div>
+            <div class="case-metrics">
+              <div><div class="case-metric-num">40%</div><div class="case-metric-label">Error Reduction</div></div>
+              <div><div class="case-metric-num">35%</div><div class="case-metric-label">Task Time ↓</div></div>
+              <div><div class="case-metric-num">98%</div><div class="case-metric-label">Adoption Rate</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="case-card fade-in" onclick="openModal('cmms')">
+          <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-950),var(--blue-800))"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">🔧</div><div class="case-product-label">CMMS</div></div></div>
+          <div class="case-body">
+            <div class="case-label">Case Study 02</div>
+            <h3 class="case-title">Computerised Maintenance Management</h3>
+            <div class="case-subtitle">Proactive asset intelligence for industrial plants</div>
+            <p class="case-desc">Designed a zero-to-one CMMS covering work orders, preventive maintenance scheduling, spare parts inventory and technician workflows — replacing paper-based systems across 5 plants.</p>
+            <div class="case-chips"><span class="tag">Service Design</span><span class="tag">Mobile-first</span><span class="tag">IoT Dashboards</span><span class="tag">Offline UX</span></div>
+            <div class="case-metrics">
+              <div><div class="case-metric-num">60%</div><div class="case-metric-label">Downtime ↓</div></div>
+              <div><div class="case-metric-num">5</div><div class="case-metric-label">Plants Deployed</div></div>
+              <div><div class="case-metric-num">3×</div><div class="case-metric-label">MTTR Improvement</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="case-card fade-in" onclick="openModal('ems')">
+          <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-900),var(--blue-700))"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">⚡</div><div class="case-product-label">EMS</div></div></div>
+          <div class="case-body">
+            <div class="case-label">Case Study 03</div>
+            <h3 class="case-title">Energy Management System</h3>
+            <div class="case-subtitle">Real-time energy intelligence for manufacturing sites</div>
+            <p class="case-desc">Built an EMS product from discovery to launch — live consumption dashboards, zone-level anomaly detection, sustainability reporting and cost allocation analytics for factory management.</p>
+            <div class="case-chips"><span class="tag">Data Visualisation</span><span class="tag">Real-time UX</span><span class="tag">Executive Dashboards</span><span class="tag">Alert Systems</span></div>
+            <div class="case-metrics">
+              <div><div class="case-metric-num">22%</div><div class="case-metric-label">Energy Savings</div></div>
+              <div><div class="case-metric-num">8</div><div class="case-metric-label">Sites Active</div></div>
+              <div><div class="case-metric-num">15min</div><div class="case-metric-label">Alert Response</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="case-card fade-in" onclick="openModal('fr')">
+          <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-800),var(--blue-600))"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">🎯</div><div class="case-product-label">FR System</div></div></div>
+          <div class="case-body">
+            <div class="case-label">Case Study 04</div>
+            <h3 class="case-title">Failure Reporting & Analytics</h3>
+            <div class="case-subtitle">RCA-driven quality intelligence platform</div>
+            <p class="case-desc">Designed an end-to-end failure reporting platform with guided RCA workflows, Pareto-based analytics, CAPA tracking and cross-plant failure pattern intelligence for quality teams.</p>
+            <div class="case-chips"><span class="tag">Workflow Design</span><span class="tag">Analytics UX</span><span class="tag">Quality Systems</span><span class="tag">Root Cause Analysis</span></div>
+            <div class="case-metrics">
+              <div><div class="case-metric-num">55%</div><div class="case-metric-label">RCA Time ↓</div></div>
+              <div><div class="case-metric-num">100%</div><div class="case-metric-label">Digital Shift</div></div>
+              <div><div class="case-metric-num">4.7★</div><div class="case-metric-label">User Rating</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- =================== SKILLS =================== -->
+<div class="page" id="page-skills">
+  <section class="section">
+    <div class="max-w">
+      <div class="fade-in" style="margin-bottom:3rem">
+        <div class="section-label">Capabilities</div>
+        <h2 class="section-title">Skills & <em>Tools</em></h2>
+      </div>
+      <div class="skills-layout">
+        <div class="skills-group fade-in">
+          <div class="skills-group-title">Design</div>
+          <div class="skill-item"><span class="skill-name">Product Design</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">UI/UX Design</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Design Systems</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Interaction Design</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-item"><span class="skill-name">Information Architecture</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Visual Design</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Motion Design</span><span class="skill-level">Intermediate</span></div>
+        </div>
+        <div class="skills-group fade-in" style="transition-delay:0.08s">
+          <div class="skills-group-title">Research & Strategy</div>
+          <div class="skill-item"><span class="skill-name">User Research</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Usability Testing</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Product Strategy</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-item"><span class="skill-name">Journey Mapping</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Competitive Analysis</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-item"><span class="skill-name">Stakeholder Management</span><span class="skill-level">Advanced</span></div>
+        </div>
+        <div class="skills-group fade-in" style="transition-delay:0.14s">
+          <div class="skills-group-title">Domain Expertise</div>
+          <div class="skill-item"><span class="skill-name">Manufacturing / Industrial IoT</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Vision Inspection Systems</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">CMMS / EMS Platforms</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Automotive Tier-1</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Food & Beverage</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-item"><span class="skill-name">ANPR / Security Systems</span><span class="skill-level">Advanced</span></div>
+        </div>
+        <div class="skills-group fade-in" style="transition-delay:0.2s">
+          <div class="skills-group-title">Technical</div>
+          <div class="skill-item"><span class="skill-name">HTML / CSS</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-item"><span class="skill-name">Framer</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-item"><span class="skill-name">Prototyping</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">Design Handoff</span><span class="skill-level">Expert</span></div>
+          <div class="skill-item"><span class="skill-name">API Understanding</span><span class="skill-level">Intermediate</span></div>
+          <div class="skill-item"><span class="skill-name">Data Visualisation</span><span class="skill-level">Advanced</span></div>
+        </div>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">🎨</div><div class="tool-chip-name">Figma</div><div class="tool-chip-type">Design & Prototype</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">⚡</div><div class="tool-chip-name">Framer</div><div class="tool-chip-type">No-code Builder</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">🖼️</div><div class="tool-chip-name">Adobe XD</div><div class="tool-chip-type">Design</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">📊</div><div class="tool-chip-name">Miro</div><div class="tool-chip-type">Collaboration</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">📋</div><div class="tool-chip-name">Notion</div><div class="tool-chip-type">Documentation</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">🔬</div><div class="tool-chip-name">Maze</div><div class="tool-chip-type">User Testing</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">📁</div><div class="tool-chip-name">Zeplin</div><div class="tool-chip-type">Handoff</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">🧩</div><div class="tool-chip-name">Storybook</div><div class="tool-chip-type">Design Systems</div></div>
+        <div class="tool-chip fade-in"><div class="tool-chip-icon">📈</div><div class="tool-chip-name">Mixpanel</div><div class="tool-chip-type">Analytics</div></div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- =================== CONTACT =================== -->
+<div class="page" id="page-contact">
+  <section class="section">
+    <div class="max-w">
+      <div class="fade-in" style="margin-bottom:3rem">
+        <div class="section-label">Let's Talk</div>
+        <h2 class="section-title">Start a <em>conversation</em></h2>
+        <p class="section-subtitle">Open to full-time product design roles, consulting and speaking in industrial UX and enterprise product design.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="fade-in">
+          <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-value">hello@productdesigner.in</div></div></div>
+          <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-value">India · Open to Remote</div></div></div>
+          <div class="contact-detail"><div class="contact-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-value">linkedin.com/in/productdesigner</div></div></div>
+          <div class="contact-detail"><div class="contact-icon">🎨</div><div><div class="contact-label">Behance / Dribbble</div><div class="contact-value">@productdesigner</div></div></div>
+          <div style="margin-top:2rem;padding:1.4rem;background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:var(--radius-lg);">
+            <div class="section-label" style="margin-bottom:0.65rem;">Availability</div>
+            <div style="display:flex;align-items:center;gap:0.7rem;">
+              <div class="pulse-dot"></div>
+              <div style="font-size:0.86rem;color:var(--text-secondary);">Available for new opportunities from Q1 2026</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form fade-in" style="transition-delay:0.1s">
+          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Your name"/></div>
+          <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="your@email.com"/></div>
+          <div class="form-group"><label class="form-label">Subject</label><input class="form-input" type="text" placeholder="Project Inquiry / Role Opportunity"/></div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or opportunity…"></textarea></div>
+          <button class="btn-primary" style="width:100%;margin-top:0.25rem;">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+    <div class="footer-right"><a class="footer-link" onclick="navigate('home')">Home</a><a class="footer-link" onclick="navigate('work')">Work</a></div>
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal"><button class="modal-close" onclick="closeModal()">✕</button><div id="modalBody"></div></div>
+</div>
+
+<script>
+// NAVIGATION
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const pg=document.getElementById('page-'+page);
+  if(pg)pg.classList.add('active');
+  const nav=document.getElementById('nav-'+page);
+  if(nav)nav.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(observeFadeIns,50);
+}
+
+// THEME
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.dataset.theme==='dark';
+  html.dataset.theme=isDark?'light':'dark';
+  document.getElementById('themeLabel').textContent=isDark?'Light':'Dark';
+}
+
+// PROJECTS
+const projects=[
+  {id:'traceability',name:'Traceability System (FJM)',cat:'mfg',catLabel:'Manufacturing',desc:'End-to-end part traceability from raw material to dispatch. Barcode/QR scanning, genealogy trees and audit trails for Faurecia JM.',tags:['Traceability','Barcode UX','Genealogy'],icon:'🔍',gradient:''},
+  {id:'process',name:'Process Management (JSW)',cat:'mfg',catLabel:'Manufacturing',desc:'Digital work instruction and process adherence platform for JSW Steel. Operator-guided workflows with real-time SOP compliance tracking.',tags:['Process UX','Work Instructions','Compliance'],icon:'⚙️',gradient:''},
+  {id:'sequential',name:'Sequential Production (J2 / JBM)',cat:'mfg',catLabel:'Manufacturing',desc:'Just-in-sequence production scheduling and tracking for automotive assembly lines at J2 and JBM Auto.',tags:['JIS','Scheduling','Automotive'],icon:'🚗',gradient:''},
+  {id:'checksheet',name:'Digital Checksheet',cat:'mfg',catLabel:'Quality Control',desc:'Replacing paper checksheets with tablet-optimised digital audit tool — shift-wise, machine-wise with photo capture and escalation.',tags:['Tablet UX','Audit','Quality'],icon:'✅',gradient:''},
+  {id:'modelmix',name:'Model Mix-up Prevention',cat:'vision',catLabel:'Vision AI',desc:'Vision-based model verification preventing assembly errors. Real-time OK/NG overlays with reject conveyor logic.',tags:['Vision AI','Error Proofing','ADAS'],icon:'🔮',gradient:'linear-gradient(135deg,var(--blue-900),var(--blue-700))'},
+  {id:'vision-fnb',name:'Vision Inspection — F&B',cat:'vision',catLabel:'Vision AI',desc:'Fill-level, cap placement and label inspection for beverage lines. 1500+ units/min at 99.7% accuracy.',tags:['F&B','Inspection','Real-time'],icon:'🍾',gradient:'linear-gradient(135deg,var(--blue-900),var(--blue-700))'},
+  {id:'hole',name:'Hole Inspection System',cat:'vision',catLabel:'Vision AI',desc:'Precision hole diameter and position verification for machined components. Sub-mm tolerance with live reject stats dashboard.',tags:['Metrology','Vision','CNC'],icon:'🔩',gradient:'linear-gradient(135deg,var(--blue-900),var(--blue-700))'},
+  {id:'bottle-cap',name:'Bottle Cap Inspection',cat:'vision',catLabel:'Vision AI',desc:'Cap torque, orientation and seal integrity verification on high-speed packaging lines for FMCG clients.',tags:['Packaging','FMCG','Vision'],icon:'🧴',gradient:'linear-gradient(135deg,var(--blue-900),var(--blue-700))'},
+  {id:'anpr',name:'ANPR — Hind Terminals',cat:'management',catLabel:'Gate Management',desc:'Automatic Number Plate Recognition for truck entry/exit management at Hind Terminals. Integration with weighbridge and ERP.',tags:['ANPR','Logistics','Gate'],icon:'🚛',gradient:''},
+  {id:'canteen',name:'Canteen Management System',cat:'management',catLabel:'Facility Management',desc:'RFID-based meal booking, usage analytics and subsidy management for plant canteens across multiple locations.',tags:['RFID','Cafeteria','HR'],icon:'🍽️',gradient:''},
+  {id:'spark',name:'Spark Minda Portal',cat:'enterprise',catLabel:'Enterprise',desc:'Supplier quality portal and KPI dashboard for Spark Minda Group — multi-plant, multi-tier supplier scorecard system.',tags:['B2B','Supplier','KPI'],icon:'⚡',gradient:''},
+  {id:'sanden',name:'Sanden Vikas — OEE Platform',cat:'mfg',catLabel:'Manufacturing',desc:'Overall Equipment Effectiveness monitoring and loss analysis for Sanden Vikas compressor manufacturing lines.',tags:['OEE','Loss Analysis','Automotive'],icon:'📊',gradient:''},
+  {id:'visitor',name:'Visitor Management System',cat:'management',catLabel:'Security & Facility',desc:'Pre-registration, badge printing, host notification and visitor analytics for secure manufacturing sites.',tags:['Security','Front Desk','NDA'],icon:'🪪',gradient:''},
+  {id:'cnc',name:'CNC Machine Monitoring',cat:'mfg',catLabel:'Manufacturing',desc:'Real-time CNC spindle utilisation, tool life tracking and alarm management dashboard integrated with MTConnect.',tags:['MTConnect','CNC','OEE'],icon:'🤖',gradient:''},
+];
+
+function renderProjects(filter='all'){
+  const grid=document.getElementById('projectsGrid');
+  const filtered=filter==='all'?projects:projects.filter(p=>p.cat===filter);
+  grid.innerHTML=filtered.map((p,i)=>`
+    <div class="project-card fade-in" style="transition-delay:${(i%3)*0.06}s" onclick="openProjectModal('${p.id}')">
+      <div class="project-thumb" ${p.gradient?`style="background:${p.gradient}"`:''}><div class="project-thumb-lines"></div><div class="project-thumb-icon">${p.icon}</div></div>
+      <div class="project-body">
+        <div class="project-category">${p.catLabel}</div>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <div class="project-meta">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+  `).join('');
+  observeFadeIns();
+}
+
+function filterProjects(filter,btn){
+  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProjects(filter);
+}
+
+// MODALS
+const caseData={
+  mm:{product:'MM Platform',title:'Material Management System',sub:'Tier-1 Automotive Supplier · 2022–2023',problem:'The client managed ₹200Cr+ daily material flows across 3 plants using SAP screens, Excel sheets and WhatsApp groups. Material shortages caused 12–18 production stoppages per month, costing significant downtime revenue.',solution:'We conducted 3 weeks of field research — shadowing store managers, production planners and truck drivers. Key insight: 80% of errors happened at handoff points. We redesigned the entire handoff UX: digital GRNs, real-time stock visibility and a mobile-first scan-verify-confirm flow, with progressive rollout and offline capability.',outcome:'After 6 months in production: 40% reduction in procurement errors, 35% faster material handling, and near-100% adoption across all 3 plants. Estimated annual saving of ₹4.2Cr in waste and downtime.',outcomes:[{n:'40%',l:'Error Reduction'},{n:'35%',l:'Task Time ↓'},{n:'₹4.2Cr',l:'Annual Savings'}]},
+  cmms:{product:'CMMS',title:'Computerised Maintenance Management',sub:'Multi-plant Industrial Manufacturer · 2022',problem:'Maintenance teams ran on paper job cards and WhatsApp groups. Breakdown history lived in engineers\' personal notebooks. Spare parts were managed by gut feel — causing ₹80L in excess inventory alongside critical stockouts.',solution:'Designed a full-stack CMMS UX from scratch: technician mobile app (offline-first), planner web dashboard, manager analytics suite and spare parts module. Conducted 40+ interviews across 3 plants before wireframing a single screen.',outcome:'Deployed across 5 plants in 8 months. MTTR improved 3× in Q1 post-launch. The spare parts module alone saved ₹25L in dead inventory and eliminated 3 critical stockout incidents.',outcomes:[{n:'60%',l:'Downtime ↓'},{n:'3×',l:'MTTR Improvement'},{n:'5',l:'Plants Live'}]},
+  ems:{product:'EMS',title:'Energy Management System',sub:'Manufacturing Conglomerate · 2023',problem:'Energy costs were the second-largest expense, but plant managers had no visibility below utility-bill level. Anomalies went undetected for weeks. Sustainability reporting was done manually in Excel, taking 2 days per month.',solution:'Designed a hierarchical energy dashboard — plant → zone → machine — with live consumption streaming, configurable alert thresholds, automated sustainability KPI cards and board-ready PDF exports with custom branding.',outcome:'8 sites live. Average 22% energy reduction within 6 months. Alert response time dropped from days to 15 minutes. Sustainability reporting now takes 15 minutes instead of 2 days.',outcomes:[{n:'22%',l:'Energy Saved'},{n:'8',l:'Sites Active'},{n:'15min',l:'Alert Response'}]},
+  fr:{product:'FR System',title:'Failure Reporting & Analytics',sub:'Quality Intelligence Platform · 2023',problem:'Quality teams submitted failure reports via email attachments. No cross-plant pattern detection, no structured RCA, no CAPA closure tracking. Monthly quality reviews were 3-hour PowerPoint gut-checks with no data integrity.',solution:'Designed a guided failure-capture form with contextual fields, a structured RCA workflow (5-Why + Fishbone), Pareto analytics across failure modes, plants and products, and automated CAPA closure workflows with escalation logic.',outcome:'55% reduction in time-to-RCA. 100% shift to digital. Quality review meetings went from 3 hours to 45 minutes. Cross-plant pattern detection surfaced 3 systemic issues in first quarter. User satisfaction: 4.7/5.',outcomes:[{n:'55%',l:'RCA Time ↓'},{n:'4.7★',l:'User Rating'},{n:'100%',l:'Digital Shift'}]}
+};
+
+function openModal(id){
+  const d=caseData[id];if(!d)return;
+  document.getElementById('modalBody').innerHTML=`
+    <div class="modal-product">${d.product}</div>
+    <div class="modal-title">${d.title}</div>
+    <div class="modal-sub">${d.sub}</div>
+    <div class="modal-section-title">The Problem</div>
+    <p class="modal-text">${d.problem}</p>
+    <div class="modal-section-title">Design Approach</div>
+    <p class="modal-text">${d.solution}</p>
+    <div class="modal-section-title">Outcomes</div>
+    <p class="modal-text">${d.outcome}</p>
+    <div class="modal-outcomes">${d.outcomes.map(o=>`<div class="modal-outcome"><div class="modal-outcome-num">${o.n}</div><div class="modal-outcome-label">${o.l}</div></div>`).join('')}</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function openProjectModal(id){
+  const p=projects.find(x=>x.id===id);if(!p)return;
+  document.getElementById('modalBody').innerHTML=`
+    <div class="modal-product">${p.catLabel}</div>
+    <div class="modal-title">${p.name}</div>
+    <div class="modal-sub">Product Design & UI/UX · End-to-end ownership</div>
+    <div class="modal-section-title">Overview</div>
+    <p class="modal-text">${p.desc}</p>
+    <div class="modal-section-title">My Role & Deliverables</div>
+    <p class="modal-text">End-to-end UX ownership — user research, information architecture, wireframing, high-fidelity UI, prototyping, usability testing and developer handoff. Collaborated with engineering, QA and stakeholders from brief to launch.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.25rem;">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+function closeModalOnBg(e){if(e.target.id==='modalOverlay')closeModal();}
+
+// INTERSECTION OBSERVER
+function observeFadeIns(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+// INIT
+renderProjects();
+observeFadeIns();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
