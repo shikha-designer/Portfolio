@@ -1223,6 +1223,11 @@ function observeFadeIns(){
   const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
   },{threshold:0.08}); document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>obs.observe(el));
 }
+        document.addEventListener("DOMContentLoaded", () => {
+  if (typeof renderProjects === "function") {
+      renderProjects();
+  }
+});
 
 // INIT renderProjects(); observeFadeIns(); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
   </script>
