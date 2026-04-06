@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Portfolio — Product Designer & UI/UX Lead</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
-<style>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Portfolio — Product Designer & UI/UX Lead</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+    <style>
 :root{
   --blue-950:#000C2E;--blue-900:#001A5C;--blue-800:#002A8A;
   --blue-700:#003BB8;--blue-600:#0048E0;--blue-500:#0051FF;
   --blue-400:#3374FF;--blue-300:#6699FF;--blue-200:#99BBFF;
   --blue-100:#CCDEFF;--blue-50:#EEF3FF;
+  --green-700:#057E39;--green-100:rgb(22,185,97,0.1); --green-50:rgb(22,185,97,0.05);
   --font-display:'Syne',sans-serif;--font-mono:'DM Mono',monospace;
   --font-serif:'Instrument Serif',serif;
-  --radius:4px;--radius-lg:12px;--transition:0.35s cubic-bezier(0.4,0,0.2,1);
-}
-[data-theme="dark"]{
+  --radius:4px;--radius-lg:12px;--transition:0.35s cubic-bezier(0.4,0,0.2,1); } [data-theme="dark"]{
   --bg:var(--blue-950);--bg-2:var(--blue-900);--bg-3:var(--blue-800);
   --surface:rgba(0,26,92,0.55);--border:rgba(51,116,255,0.16);
   --border-strong:rgba(51,116,255,0.38);--text-primary:var(--blue-50);
@@ -24,9 +23,7 @@
   --accent:var(--blue-500);--accent-hover:var(--blue-400);
   --tag-bg:rgba(0,81,255,0.13);--tag-border:rgba(0,81,255,0.3);
   --nav-bg:rgba(0,12,46,0.88);--glow:0 0 60px rgba(0,81,255,0.22);
-  --glow-sm:0 0 20px rgba(0,81,255,0.13);
-}
-[data-theme="light"]{
+  --glow-sm:0 0 20px rgba(0,81,255,0.13); } [data-theme="light"]{
   --bg:var(--blue-50);--bg-2:#FFFFFF;--bg-3:var(--blue-100);
   --surface:rgba(255,255,255,0.8);--border:rgba(0,81,255,0.12);
   --border-strong:rgba(0,81,255,0.28);--text-primary:var(--blue-950);
@@ -57,15 +54,18 @@ body::before{
 /* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  background:var(--nav-bg);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:0 clamp(1.5rem,5vw,4rem);
-  display:flex;align-items:center;justify-content:space-between;height:64px;
+  background:var(--bg-2);
+  backdrop-filter:blur(50px);
+  padding: 10px clamp(1.5rem,5vw,4rem);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   transition:background var(--transition),border-color var(--transition);
 }
+
 .nav-logo{font-size:0.95rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-family:var(--font-mono);cursor:pointer;}
 .nav-links{display:flex;gap:clamp(1rem,2.5vw,2rem);align-items:center;}
-.nav-links a{font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color:var(--text-secondary);text-decoration:none;transition:color var(--transition);cursor:pointer;}
+.nav-links a{font-size:0.76rem;letter-spacing:0.1em;text-transform:capitalize;font-weight:500;color:var(--text-secondary);text-decoration:none;transition:color var(--transition);cursor:pointer;}
 .nav-links a:hover,.nav-links a.active{color:var(--accent);}
 .theme-toggle{
   display:flex;align-items:center;gap:0.5rem;cursor:pointer;
@@ -76,14 +76,10 @@ nav{
 .toggle-track{
   width:36px;height:20px;border-radius:10px;
   background:var(--blue-800);position:relative;
-  transition:background var(--transition);border:1px solid var(--border-strong);
-}
-[data-theme="light"] .toggle-track{background:var(--blue-200);}
+  transition:background var(--transition);border:1px solid var(--border-strong); } [data-theme="light"] .toggle-track{background:var(--blue-200);}
 .toggle-thumb{
   width:14px;height:14px;border-radius:50%;background:var(--accent);
-  position:absolute;top:2px;left:2px;transition:transform var(--transition);
-}
-[data-theme="light"] .toggle-thumb{transform:translateX(16px);}
+  position:absolute;top:2px;left:2px;transition:transform var(--transition); } [data-theme="light"] .toggle-thumb{transform:translateX(16px);}
 .toggle-label{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);letter-spacing:0.08em;user-select:none;}
 
 /* PAGES */
@@ -100,7 +96,7 @@ nav{
 .max-w{max-width:1200px;margin-left:auto;margin-right:auto;}
 
 /* HERO */
-#hero{min-height:calc(100vh - 64px);display:grid;place-items:center;padding:4rem clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden;}
+#hero{min-height:calc(100vh - 64px);display:flex; justify-content:space-between;padding:3rem 1rem 3rem 7rem;position:relative;overflow:hidden;}
 .hero-bg-orb{
   position:absolute;width:600px;height:600px;border-radius:50%;
   background:radial-gradient(circle,rgba(0,81,255,0.12) 0%,transparent 70%);
@@ -108,11 +104,11 @@ nav{
 }
 .hero-bg-orb-1{top:-10%;right:-5%;}
 .hero-bg-orb-2{bottom:-15%;left:-8%;opacity:0.6;}
-.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:center;max-width:1200px;width:100%;}
-.hero-eyebrow{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;}
+.hero-grid{display:grid; grid-template-columns:2fr 1.6fr;gap:0.4rem;align-items:center;width:100%;}
+.hero-eyebrow{background-color: var(--green-50); border:1px solid var(--green-100); box-shadow:0 0px 0px 2px var(--green-50); width: fit-content; font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--green-700);margin-bottom:1.5rem;padding:0.6rem 1rem; border-radius: 8px; display:flex;align-items:center;gap:0.75rem;}
 .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.75);}}
-.hero-name{font-size:clamp(3rem,6vw,5.2rem);font-weight:800;line-height:0.95;letter-spacing:-0.02em;color:var(--text-primary);}
+.hero-name{font-size:clamp(3rem,6vw,5.2rem);font-weight:600;line-height:0.95;letter-spacing:-0.02em;color:var(--text-primary);}
 .hero-name span{display:block;font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);font-size:clamp(2.4rem,5vw,4.2rem);}
 .hero-role{margin-top:1.5rem;font-size:0.97rem;color:var(--text-secondary);line-height:1.7;max-width:420px;}
 .hero-ctas{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;}
@@ -132,7 +128,7 @@ nav{
 .skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue-600),var(--blue-400));border-radius:2px;animation:fillBar 1.6s ease forwards;}
 @keyframes fillBar{from{width:0}to{width:var(--w)}}
 .floating-badge{position:absolute;background:var(--bg-2);border:1px solid var(--border-strong);border-radius:var(--radius);padding:0.55rem 0.9rem;backdrop-filter:blur(20px);font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);letter-spacing:0.06em;box-shadow:var(--glow-sm);}
-.badge-1{top:-1rem;right:-1.5rem;}
+.badge-1{top:-1rem;right:-1.5rem; z-index: 999;}
 .badge-2{bottom:3.5rem;left:-2rem;}
 
 /* MARQUEE */
@@ -277,394 +273,845 @@ footer{border-top:1px solid var(--border);padding:1.8rem clamp(1.5rem,5vw,4rem);
   .case-metrics{flex-wrap:wrap;gap:1rem;}
   .modal-outcomes{grid-template-columns:1fr 1fr;}
 }
-</style>
-</head>
-<body>
-<div class="bg-grid"></div>
+    </style>
+  </head>
+  <body>
+    <div class="bg-grid"></div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo" onclick="navigate('home')">PD</div>
-  <div class="nav-links">
-    <a onclick="navigate('home')" id="nav-home" class="active">Home</a>
-    <a onclick="navigate('about')" id="nav-about">About</a>
-    <a onclick="navigate('work')" id="nav-work">Work</a>
-    <a onclick="navigate('cases')" id="nav-cases">Case Studies</a>
-    <a onclick="navigate('skills')" id="nav-skills" class="hide-sm">Skills</a>
-    <a onclick="navigate('contact')" id="nav-contact">Contact</a>
-    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-      <span class="toggle-label" id="themeLabel">Dark</span>
-      <div class="toggle-track"><div class="toggle-thumb"></div></div>
-    </div>
-  </div>
-</nav>
-
-<!-- =================== HOME =================== -->
-<div class="page active" id="page-home">
-  <section id="hero">
-    <div class="hero-bg-orb hero-bg-orb-1"></div>
-    <div class="hero-bg-orb hero-bg-orb-2"></div>
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow"><span class="pulse-dot"></span>Available for new opportunities</div>
-        <h1 class="hero-name">Product<br>Designer<span>& UI/UX Lead</span></h1>
-        <p class="hero-role">Crafting enterprise digital experiences at the intersection of industrial intelligence and human intuition. Specialised in manufacturing, vision AI and automation systems.</p>
-        <div class="hero-ctas">
-          <button class="btn-primary" onclick="navigate('work')">View Work</button>
-          <button class="btn-outline" onclick="navigate('contact')">Get in Touch</button>
-        </div>
-        <div class="hero-stats">
-          <div><div class="hero-stat-num">50+</div><div class="hero-stat-label">Projects</div></div>
-          <div><div class="hero-stat-num">7+</div><div class="hero-stat-label">Years Exp.</div></div>
-          <div><div class="hero-stat-num">12+</div><div class="hero-stat-label">Industries</div></div>
-        </div>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo" onclick="navigate('home')">
+        <img src="./Portfolio/Logo/Shikha-Logo.svg" width="15%"/>
       </div>
-      <div class="hero-visual">
-        <div class="floating-badge badge-1">⬡ UI/UX Lead</div>
-        <div class="hero-card">
-          <div class="hero-avatar">RK</div>
-          <div class="section-label" style="margin-bottom:0.4rem;">Core Expertise</div>
-          <div class="skill-bars">
-            <div><div class="skill-bar-label"><span>Product Strategy</span><span>95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:95%"></div></div></div>
-            <div><div class="skill-bar-label"><span>UI/UX Design</span><span>98%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:98%"></div></div></div>
-            <div><div class="skill-bar-label"><span>Vision Systems</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
-            <div><div class="skill-bar-label"><span>Industrial IoT</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
-            <div><div class="skill-bar-label"><span>Design Systems</span><span>92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
+      <div class="nav-links">
+        <a onclick="navigate('home')" id="nav-home" class="active">Home</a>
+        <a onclick="navigate('about')" id="nav-about">About</a>
+        <a onclick="navigate('work')" id="nav-work">Work</a>
+        <a onclick="navigate('cases')" id="nav-cases">Case Studies</a>
+        <a onclick="navigate('skills')" id="nav-skills" class="hide-sm">Skills</a>
+        <a onclick="navigate('contact')" id="nav-contact">Contact</a>
+        <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+          <span class="toggle-label" id="themeLabel">Light</span>
+          <div class="toggle-track">
+            <div class="toggle-thumb"></div>
           </div>
         </div>
-        <div class="floating-badge badge-2">◈ 50+ Delivered</div>
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <div class="marquee-wrap">
-    <div class="marquee-inner">
-      <div class="marquee-item">Traceability FJM</div><div class="marquee-item">Process Management JSW</div><div class="marquee-item">Sequential Production JBM</div><div class="marquee-item">Digital Checksheet</div><div class="marquee-item">Vision Inspection F&B</div><div class="marquee-item">Hole Inspection</div><div class="marquee-item">Bottle Cap Inspection</div><div class="marquee-item">ANPR — Hind Terminals</div><div class="marquee-item">Canteen Management</div><div class="marquee-item">Spark Minda</div><div class="marquee-item">Sanden Vikas</div><div class="marquee-item">Visitor Management</div><div class="marquee-item">CNC Monitoring</div><div class="marquee-item">CMMS Platform</div><div class="marquee-item">MM System</div><div class="marquee-item">EMS Solution</div>
-      <div class="marquee-item">Traceability FJM</div><div class="marquee-item">Process Management JSW</div><div class="marquee-item">Sequential Production JBM</div><div class="marquee-item">Digital Checksheet</div><div class="marquee-item">Vision Inspection F&B</div><div class="marquee-item">Hole Inspection</div><div class="marquee-item">Bottle Cap Inspection</div><div class="marquee-item">ANPR — Hind Terminals</div><div class="marquee-item">Canteen Management</div><div class="marquee-item">Spark Minda</div><div class="marquee-item">Sanden Vikas</div><div class="marquee-item">Visitor Management</div><div class="marquee-item">CNC Monitoring</div><div class="marquee-item">CMMS Platform</div><div class="marquee-item">MM System</div><div class="marquee-item">EMS Solution</div>
-    </div>
-  </div>
+    <!-- =================== HOME =================== -->
+    <div class="page active" id="page-home">
+      <section id="hero">
+        <div class="hero-bg-orb hero-bg-orb-1"></div>
+        <div class="hero-bg-orb hero-bg-orb-2"></div>
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">
+              <!-- <span class="pulse-dot"></span>  -->
+              <span style="width:80px; height:2px; border-radius:10px; background-color:var(--green-700);"></span> Available for new opportunities</div>
+            <h1 class="hero-name">Product Designer<span>& UI/UX Lead</span>
+            </h1>
+            <p class="hero-role">Crafting enterprise digital experiences at the intersection of industrial intelligence and human intuition. Specialised in manufacturing, vision AI and automation systems.</p>
+            <div class="hero-ctas">
+              <button class="btn-primary" onclick="navigate('work')">View Work</button>
+              <button class="btn-outline" onclick="navigate('contact')">Get in Touch</button>
+            </div>
+            <div class="hero-stats">
+              <div>
+                <div class="hero-stat-num">50+</div>
+                <div class="hero-stat-label">Projects</div>
+              </div>
+              <div>
+                <div class="hero-stat-num">7+</div>
+                <div class="hero-stat-label">Years Exp.</div>
+              </div>
+              <div>
+                <div class="hero-stat-num">12+</div>
+                <div class="hero-stat-label">Industries</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <svg viewBox="10 -50 800 800" width="100%" height="100%"
+              xmlns="http://www.w3.org/2000/svg">
 
-  <section class="section">
-    <div class="max-w">
-      <div class="preview-header">
-        <div>
-          <div class="section-label">Selected Work</div>
-          <h2 class="section-title">Enterprise <em>Products</em></h2>
-        </div>
-        <button class="btn-outline" onclick="navigate('work')">All Projects →</button>
-      </div>
-      <div class="projects-grid">
-        <div class="project-card featured fade-in" onclick="navigate('cases')">
-          <div class="project-thumb"><div class="project-thumb-lines"></div><div class="project-thumb-icon">📦</div></div>
-          <div class="project-body">
-            <div class="project-category">Case Study · Enterprise SaaS</div>
-            <div class="project-name">Material Management (MM) Platform</div>
-            <div class="project-desc">End-to-end material flow design for manufacturing floors — from requisition to delivery with real-time tracking and predictive procurement intelligence.</div>
-            <div class="project-meta"><span class="project-tag">Product Design</span><span class="project-tag">Design System</span><span class="project-tag">Dashboard</span></div>
-          </div>
-          <div class="project-arrow">→</div>
-        </div>
-        <div class="project-card fade-in" onclick="navigate('cases')">
-          <div class="project-thumb"><div class="project-thumb-lines"></div><div class="project-thumb-icon">🔧</div></div>
-          <div class="project-body">
-            <div class="project-category">Case Study · CMMS</div>
-            <div class="project-name">Computerised Maintenance Management</div>
-            <div class="project-desc">Proactive maintenance scheduling, asset lifecycle management and work order automation for industrial plants.</div>
-            <div class="project-meta"><span class="project-tag">UX Research</span><span class="project-tag">IoT Integration</span></div>
-          </div>
-          <div class="project-arrow">→</div>
-        </div>
-        <div class="project-card fade-in" onclick="navigate('cases')">
-          <div class="project-thumb" style="background:linear-gradient(135deg,var(--blue-900),var(--blue-700))"><div class="project-thumb-lines"></div><div class="project-thumb-icon">⚡</div></div>
-          <div class="project-body">
-            <div class="project-category">Case Study · Energy</div>
-            <div class="project-name">Energy Management System (EMS)</div>
-            <div class="project-desc">Real-time energy consumption monitoring with anomaly detection, zone-level analytics and sustainability KPI dashboards.</div>
-            <div class="project-meta"><span class="project-tag">Data Viz</span><span class="project-tag">Analytics</span></div>
-          </div>
-          <div class="project-arrow">→</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer>
-    <div class="footer-left">© 2025 Product Designer & UI/UX Lead · All rights reserved</div>
-    <div class="footer-right"><a class="footer-link" onclick="navigate('work')">Work</a><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
-  </footer>
-</div>
+              <style>
+                /* ---------- SQUARE STACK ---------- */
+                .square {
+                  fill: white;
+                  opacity: .2;
+                  filter: drop-shadow(0 0 40px rgba(25,33,64,0.5));
+                  transform-origin: 500px 500px;
+                  animation: rotateFloat 120s ease-in-out infinite;
+                }
+                .square:nth-child(1){ animation-delay:-90s }
+                .square:nth-child(2){ animation-delay:-75s }
+                .square:nth-child(3){ animation-delay:-60s }
+                .square:nth-child(4){ animation-delay:-45s }
+                .square:nth-child(5){ animation-delay:-30s }
 
-<!-- =================== ABOUT =================== -->
-<div class="page" id="page-about">
-  <section class="section">
-    <div class="about-grid max-w">
-      <div>
-        <div class="about-photo fade-in">👤</div>
-        <div class="about-tags fade-in" style="transition-delay:0.1s">
-          <span class="tag">Product Design</span><span class="tag">UI/UX Lead</span><span class="tag">Design Systems</span><span class="tag">Vision AI</span><span class="tag">Industrial IoT</span><span class="tag">Framer</span><span class="tag">Figma</span><span class="tag">Manufacturing</span><span class="tag">Automotive</span><span class="tag">F&B</span>
+                @keyframes rotateFloat {
+
+                  from {
+                    transform: rotate(0deg);
+                  }
+                
+                  to {
+                    transform: rotate(360deg);
+                  }
+
+                }
+
+                /* ---------- CONNECTOR ---------- */
+
+                .connector {
+                  fill: none;
+                  stroke: #c9cfdb;
+                  stroke-width: 1.5;
+                  stroke-dasharray: 5 6;
+                  animation: dashMove 10s linear infinite;
+                }
+
+                @keyframes dashMove {
+                  from { stroke-dashoffset: 0 }
+                  to { stroke-dashoffset: 60 }
+                }
+
+                /* ---------- NODE ---------- */
+
+                .node {
+                  fill: #0051FF;
+                }
+
+                /* ---------- CENTER ---------- */
+
+                .center {
+                  fill: #0051FF;
+                  filter: drop-shadow(0 0 20px rgba(0,81,255,.4));
+                  animation: pulse 2.5s ease-in-out infinite;
+                }
+
+                @keyframes pulse {
+
+                  0% { r: 7 }
+                  50% { r: 11 }
+                  100% { r: 7 }
+
+                }
+
+                /* ---------- LABEL ---------- */
+
+                .label rect {
+                  rx: 5;
+                }
+                .label text {
+                  font-family: "Syne", sans-serif;
+                  font-size: 14px;
+                  fill: white;
+                  font-weight: 600;
+                  dominant-baseline: middle;
+                  text-anchor: middle;
+                }
+              </style>
+              <!-- MULTI SQUARES -->
+
+              <g transform="translate(10, -40)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 1000 1000" fill="none">
+                  <path class="square" d="M475 14.4338C490.47 5.50212 509.53 5.50212 525 14.4338L908.013 235.566C923.483 244.498 933.013 261.004 933.013 278.868V721.132C933.013 738.996 923.483 755.502 908.013 764.434L525 985.566C509.53 994.498 490.47 994.498 475 985.566L91.9873 764.434C76.5173 755.502 66.9873 738.996 66.9873 721.132V278.868C66.9873 261.004 76.5173 244.498 91.9873 235.566L475 14.4338Z" stroke="red" fill="white" fill-opacity="1"/>
+                  <path class="square" d="M475 114.434C490.47 105.502 509.53 105.502 525 114.434L821.41 285.566C836.88 294.498 846.41 311.004 846.41 328.868V671.132C846.41 688.996 836.88 705.502 821.41 714.434L525 885.566C509.53 894.498 490.47 894.498 475 885.566L178.59 714.434C163.12 705.502 153.59 688.996 153.59 671.132V328.868C153.59 311.004 163.12 294.498 178.59 285.566L475 114.434Z" stroke="brown" fill="white" fill-opacity="1"/>
+                  <path class="square" d="M475 214.434C490.47 205.502 509.53 205.502 525 214.434L734.808 335.566C750.278 344.498 759.808 361.004 759.808 378.868V621.132C759.808 638.996 750.278 655.502 734.808 664.434L525 785.566C509.53 794.498 490.47 794.498 475 785.566L265.192 664.434C249.722 655.502 240.192 638.996 240.192 621.132V378.868C240.192 361.004 249.722 344.498 265.192 335.566L475 214.434Z" stroke="blue" fill="white" fill-opacity="1"/>
+                  <path class="square" d="M475 314.434C490.47 305.502 509.53 305.502 525 314.434L648.205 385.566C663.675 394.498 673.205 411.004 673.205 428.868V571.132C673.205 588.996 663.675 605.502 648.205 614.434L525 685.566C509.53 694.498 490.47 694.498 475 685.566L351.795 614.434C336.325 605.502 326.795 588.996 326.795 571.132V428.868C326.795 411.004 336.325 394.498 351.795 385.566L475 314.434Z" stroke="yellow" fill="white" fill-opacity="1"/>
+                  <path class="square" d="M475 414.434C490.47 405.502 509.53 405.502 525 414.434L561.603 435.566C577.073 444.498 586.603 461.004 586.603 478.868V521.132C586.603 538.996 577.073 555.502 561.603 564.434L525 585.566C509.53 594.498 490.47 594.498 475 585.566L438.397 564.434C422.927 555.502 413.397 538.996 413.397 521.132V478.868C413.397 461.004 422.927 444.498 438.397 435.566L475 414.434Z" stroke="green" fill="white" fill-opacity="1"/>
+                </svg>
+              </g>
+
+              <!-- CONNECTORS -->
+
+              <!-- center connections -->
+              <path class="connector" d="M400 300 L120 300"/>
+              <path class="connector" d="M400 300 L400 90"/>
+              <path class="connector" d="M400 300 L700 300"/>
+              <path class="connector" d="M400 300 L400 560"/>
+
+              <!-- design connections -->
+              <path class="connector" d="M300 300 L300 400"/>
+              <path class="connector" d="M225 300 L225 500"/>
+
+              <!-- wireframe connections -->
+              <path class="connector" d="M200 300 L200 220"/>
+              <path class="connector" d="M500 300 L500 140"/>
+              <path class="connector" d="M470 300 L470 400"/>
+
+              <!-- center -->
+              <circle cx="400" cy="300" r="8" class="center"/>
+
+              <!-- LABELS -->
+
+              <g class="label">
+                <rect x="70" y="285" width="100" height="32" fill="#dd4545"/>
+                <text x="120" y="301">Design</text>
+              </g>
+
+              <g class="label">
+                <rect x="360" y="70" width="110" height="32" fill="#3681c2"/>
+                <text x="415" y="86">Branding</text>
+              </g>
+
+              <g class="label">
+                <rect x="640" y="285" width="120" height="32" fill="#dd8445"/>
+                <text x="700" y="301">Wireframes</text>
+              </g>
+
+              <g class="label">
+                <rect x="350" y="550" width="110" height="32" fill="#7a68cd"/>
+                <text x="405" y="566">Sketches</text>
+              </g>
+
+              <g class="label">
+                <rect x="250" y="380" width="110" height="32" fill="#a9426a"/>
+                <text x="304" y="396">Research</text>
+              </g>
+
+              <g class="label">
+                <rect x="160" y="480" width="130" height="32" fill="#FF7A00"/>
+                <text x="225" y="496">Prototypes</text>
+              </g>
+
+              <g class="label">
+                <rect x="450" y="130" width="110" height="32" fill="#8B5BC8" opacity=".9"/>
+                <text x="505" y="147">Mockups</text>
+              </g>
+
+              <g class="label">
+                <rect x="160" y="190" width="140" height="32" fill="#00BD8E"/>
+                <text x="230" y="207">User Stories</text>
+              </g>
+
+              <g class="label">
+                <rect x="410" y="390" width="130" height="32" fill="#92E1A2"/>
+                <text x="475" y="406">Animation</text>
+              </g>
+
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <div class="marquee-wrap">
+        <div class="marquee-inner">
+          <div class="marquee-item">Traceability FJM</div>
+          <div class="marquee-item">Process Management JSW</div>
+          <div class="marquee-item">Sequential Production JBM</div>
+          <div class="marquee-item">Digital Checksheet</div>
+          <div class="marquee-item">Vision Inspection F&B</div>
+          <div class="marquee-item">Hole Inspection</div>
+          <div class="marquee-item">Bottle Cap Inspection</div>
+          <div class="marquee-item">ANPR — Hind Terminals</div>
+          <div class="marquee-item">Canteen Management</div>
+          <div class="marquee-item">Spark Minda</div>
+          <div class="marquee-item">Sanden Vikas</div>
+          <div class="marquee-item">Visitor Management</div>
+          <div class="marquee-item">CNC Monitoring</div>
+          <div class="marquee-item">CMMS Platform</div>
+          <div class="marquee-item">MM System</div>
+          <div class="marquee-item">EMS Solution</div>
+          <div class="marquee-item">Traceability FJM</div>
+          <div class="marquee-item">Process Management JSW</div>
+          <div class="marquee-item">Sequential Production JBM</div>
+          <div class="marquee-item">Digital Checksheet</div>
+          <div class="marquee-item">Vision Inspection F&B</div>
+          <div class="marquee-item">Hole Inspection</div>
+          <div class="marquee-item">Bottle Cap Inspection</div>
+          <div class="marquee-item">ANPR — Hind Terminals</div>
+          <div class="marquee-item">Canteen Management</div>
+          <div class="marquee-item">Spark Minda</div>
+          <div class="marquee-item">Sanden Vikas</div>
+          <div class="marquee-item">Visitor Management</div>
+          <div class="marquee-item">CNC Monitoring</div>
+          <div class="marquee-item">CMMS Platform</div>
+          <div class="marquee-item">MM System</div>
+          <div class="marquee-item">EMS Solution</div>
         </div>
       </div>
-      <div class="fade-in" style="transition-delay:0.12s">
-        <div class="section-label">About Me</div>
-        <h2 class="section-title">Designing <em>systems</em><br>that think</h2>
-        <div class="about-bio">
-          <p>I'm a Product Designer and UI/UX Lead with 7+ years crafting enterprise-grade digital products for manufacturing, automotive, food & beverage and energy industries. I bridge complex industrial processes with intuitive human interfaces.</p>
-          <p>My work spans pixel-level UI craft to system-wide product strategy — from shop floors and control rooms to executive dashboards — all demanding zero-tolerance for ambiguity and error.</p>
-          <p>Specialised in vision inspection systems, traceability platforms, CMMS, EMS and operational intelligence tools. Every design decision is grounded in how real operators think, move and react under pressure.</p>
-        </div>
-        <div class="exp-items">
-          <div class="exp-item">
-            <div class="exp-year">2021 — Present</div>
+
+      <section class="section">
+        <div class="max-w">
+          <div class="preview-header">
             <div>
-              <div class="exp-title">UI/UX Lead & Product Designer</div>
-              <div class="exp-company">Manufacturing Tech / Industrial SaaS</div>
-              <div class="exp-desc">Leading design for 15+ concurrent enterprise products across automotive, F&B and energy verticals. Building and maintaining multi-brand design systems.</div>
+              <div class="section-label">Selected Work</div>
+              <h2 class="section-title">Enterprise <em>Products</em></h2>
             </div>
+            <button class="btn-outline" onclick="navigate('work')">All Projects →</button>
           </div>
-          <div class="exp-item">
-            <div class="exp-year">2019 — 2021</div>
-            <div>
-              <div class="exp-title">Senior Product Designer</div>
-              <div class="exp-company">Industrial Automation Firm</div>
-              <div class="exp-desc">Designed SCADA-adjacent interfaces, vision system dashboards and real-time monitoring platforms for Tier-1 auto suppliers.</div>
+          <div class="projects-grid">
+            <div class="project-card featured fade-in" onclick="navigate('cases')">
+              <div class="project-thumb"><div class="project-thumb-lines"></div><div class="project-thumb-icon">📦</div></div>
+              <div class="project-body">
+                <div class="project-category">Case Study · Enterprise SaaS</div>
+                <div class="project-name">Material Management (MM) Platform</div>
+                <div class="project-desc">End-to-end material flow design for manufacturing floors — from requisition to delivery with real-time tracking and predictive procurement intelligence.</div>
+                <div class="project-meta"><span class="project-tag">Product Design</span><span class="project-tag">Design System</span><span class="project-tag">Dashboard</span></div>
+              </div>
+              <div class="project-arrow">→</div>
             </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-year">2017 — 2019</div>
-            <div>
-              <div class="exp-title">UX Designer</div>
-              <div class="exp-company">Digital Product Studio</div>
-              <div class="exp-desc">Full-spectrum UX: research, wireframing, prototyping and handoff for SaaS and IoT products across multiple domains.</div>
+            <div class="project-card fade-in" onclick="navigate('cases')">
+              <div class="project-thumb"><div class="project-thumb-lines"></div><div class="project-thumb-icon">🔧</div></div>
+              <div class="project-body">
+                <div class="project-category">Case Study · CMMS</div>
+                <div class="project-name">Computerised Maintenance Management</div>
+                <div class="project-desc">Proactive maintenance scheduling, asset lifecycle management and work order automation for industrial plants.</div>
+                <div class="project-meta"><span class="project-tag">UX Research</span><span class="project-tag">IoT Integration</span></div>
+              </div>
+              <div class="project-arrow">→</div>
+            </div>
+            <div class="project-card fade-in" onclick="navigate('cases')">
+              <div class="project-thumb" style="background:linear-gradient(135deg,var(--blue-900),var(--blue-700))"><div class="project-thumb-lines"></div><div class="project-thumb-icon">⚡</div></div>
+              <div class="project-body">
+                <div class="project-category">Case Study · Energy</div>
+                <div class="project-name">Energy Management System (EMS)</div>
+                <div class="project-desc">Real-time energy consumption monitoring with anomaly detection, zone-level analytics and sustainability KPI dashboards.</div>
+                <div class="project-meta"><span class="project-tag">Data Viz</span><span class="project-tag">Analytics</span></div>
+              </div>
+              <div class="project-arrow">→</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      <footer>
+        <div class="footer-left">© 2025 Product Designer & UI/UX Lead · All rights reserved</div>
+        <div class="footer-right">
+          <a class="footer-link" onclick="navigate('work')">Work</a>
+          <a class="footer-link" onclick="navigate('contact')">Contact</a>
+        </div>
+      </footer>
     </div>
-  </section>
-  <footer>
-    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
-    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
-  </footer>
-</div>
 
-<!-- =================== WORK =================== -->
-<div class="page" id="page-work">
-  <section class="section">
-    <div class="max-w">
-      <div class="work-header fade-in">
-        <div>
-          <div class="section-label">All Projects</div>
-          <h2 class="section-title">50+ <em>Projects</em></h2>
-        </div>
-        <div class="filter-tabs">
-          <button class="filter-tab active" onclick="filterProjects('all',this)">All</button>
-          <button class="filter-tab" onclick="filterProjects('vision',this)">Vision AI</button>
-          <button class="filter-tab" onclick="filterProjects('mfg',this)">Manufacturing</button>
-          <button class="filter-tab" onclick="filterProjects('enterprise',this)">Enterprise</button>
-          <button class="filter-tab" onclick="filterProjects('management',this)">Management</button>
-        </div>
-      </div>
-      <div class="projects-grid" id="projectsGrid"></div>
-    </div>
-  </section>
-  <footer>
-    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
-    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
-  </footer>
-</div>
-
-<!-- =================== CASE STUDIES =================== -->
-<div class="page" id="page-cases">
-  <section class="section">
-    <div class="max-w">
-      <div class="fade-in" style="margin-bottom:3rem">
-        <div class="section-label">Deep Dives</div>
-        <h2 class="section-title">Case <em>Studies</em></h2>
-        <p class="section-subtitle">Four flagship enterprise products — each representing months of research, iteration and cross-functional collaboration.</p>
-      </div>
-      <div class="case-studies-grid">
-        <div class="case-card fade-in" onclick="openModal('mm')">
-          <div class="case-visual"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">📦</div><div class="case-product-label">MM Platform</div></div></div>
-          <div class="case-body">
-            <div class="case-label">Case Study 01</div>
-            <h3 class="case-title">Material Management System</h3>
-            <div class="case-subtitle">End-to-end supply chain UX for Tier-1 auto suppliers</div>
-            <p class="case-desc">Redesigned the entire material requisition, tracking and delivery experience for a platform managing ₹200Cr+ in daily material flow. Reduced procurement errors by 40% and cut operator task time by 35%.</p>
-            <div class="case-chips"><span class="tag">User Research</span><span class="tag">Information Architecture</span><span class="tag">Design System</span><span class="tag">Usability Testing</span></div>
-            <div class="case-metrics">
-              <div><div class="case-metric-num">40%</div><div class="case-metric-label">Error Reduction</div></div>
-              <div><div class="case-metric-num">35%</div><div class="case-metric-label">Task Time ↓</div></div>
-              <div><div class="case-metric-num">98%</div><div class="case-metric-label">Adoption Rate</div></div>
+    <!-- =================== ABOUT =================== -->
+    <div class="page" id="page-about">
+      <section class="section">
+        <div class="about-grid max-w">
+          <div>
+            <div class="about-photo fade-in">👤</div>
+            <div class="about-tags fade-in" style="transition-delay:0.1s">
+              <span class="tag">Product Design</span>
+              <span class="tag">UI/UX Lead</span>
+              <span class="tag">Design Systems</span>
+              <span class="tag">Vision AI</span>
+              <span class="tag">Industrial IoT</span>
+              <span class="tag">Framer</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Manufacturing</span>
+              <span class="tag">Automotive</span>
+              <span class="tag">F&B</span>
             </div>
           </div>
-        </div>
-        <div class="case-card fade-in" onclick="openModal('cmms')">
-          <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-950),var(--blue-800))"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">🔧</div><div class="case-product-label">CMMS</div></div></div>
-          <div class="case-body">
-            <div class="case-label">Case Study 02</div>
-            <h3 class="case-title">Computerised Maintenance Management</h3>
-            <div class="case-subtitle">Proactive asset intelligence for industrial plants</div>
-            <p class="case-desc">Designed a zero-to-one CMMS covering work orders, preventive maintenance scheduling, spare parts inventory and technician workflows — replacing paper-based systems across 5 plants.</p>
-            <div class="case-chips"><span class="tag">Service Design</span><span class="tag">Mobile-first</span><span class="tag">IoT Dashboards</span><span class="tag">Offline UX</span></div>
-            <div class="case-metrics">
-              <div><div class="case-metric-num">60%</div><div class="case-metric-label">Downtime ↓</div></div>
-              <div><div class="case-metric-num">5</div><div class="case-metric-label">Plants Deployed</div></div>
-              <div><div class="case-metric-num">3×</div><div class="case-metric-label">MTTR Improvement</div></div>
+          <div class="fade-in" style="transition-delay:0.12s">
+            <div class="section-label">About Me</div>
+            <h2 class="section-title">Designing <em>systems</em>
+              <br>that think</h2>
+              <div class="about-bio">
+                <p>I'm a Product Designer and UI/UX Lead with 7+ years crafting enterprise-grade digital products for manufacturing, automotive, food & beverage and energy industries. I bridge complex industrial processes with intuitive human interfaces.</p>
+                <p>My work spans pixel-level UI craft to system-wide product strategy — from shop floors and control rooms to executive dashboards — all demanding zero-tolerance for ambiguity and error.</p>
+                <p>Specialised in vision inspection systems, traceability platforms, CMMS, EMS and operational intelligence tools. Every design decision is grounded in how real operators think, move and react under pressure.</p>
+              </div>
+              <div class="exp-items">
+                <div class="exp-item">
+                  <div class="exp-year">2021 — Present</div>
+                  <div>
+                    <div class="exp-title">UI/UX Lead & Product Designer</div>
+                    <div class="exp-company">Manufacturing Tech / Industrial SaaS</div>
+                    <div class="exp-desc">Leading design for 15+ concurrent enterprise products across automotive, F&B and energy verticals. Building and maintaining multi-brand design systems.</div>
+                  </div>
+                </div>
+                <div class="exp-item">
+                  <div class="exp-year">2019 — 2021</div>
+                  <div>
+                    <div class="exp-title">Senior Product Designer</div>
+                    <div class="exp-company">Industrial Automation Firm</div>
+                    <div class="exp-desc">Designed SCADA-adjacent interfaces, vision system dashboards and real-time monitoring platforms for Tier-1 auto suppliers.</div>
+                  </div>
+                </div>
+                <div class="exp-item">
+                  <div class="exp-year">2017 — 2019</div>
+                  <div>
+                    <div class="exp-title">UX Designer</div>
+                    <div class="exp-company">Digital Product Studio</div>
+                    <div class="exp-desc">Full-spectrum UX: research, wireframing, prototyping and handoff for SaaS and IoT products across multiple domains.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="case-card fade-in" onclick="openModal('ems')">
-          <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-900),var(--blue-700))"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">⚡</div><div class="case-product-label">EMS</div></div></div>
-          <div class="case-body">
-            <div class="case-label">Case Study 03</div>
-            <h3 class="case-title">Energy Management System</h3>
-            <div class="case-subtitle">Real-time energy intelligence for manufacturing sites</div>
-            <p class="case-desc">Built an EMS product from discovery to launch — live consumption dashboards, zone-level anomaly detection, sustainability reporting and cost allocation analytics for factory management.</p>
-            <div class="case-chips"><span class="tag">Data Visualisation</span><span class="tag">Real-time UX</span><span class="tag">Executive Dashboards</span><span class="tag">Alert Systems</span></div>
-            <div class="case-metrics">
-              <div><div class="case-metric-num">22%</div><div class="case-metric-label">Energy Savings</div></div>
-              <div><div class="case-metric-num">8</div><div class="case-metric-label">Sites Active</div></div>
-              <div><div class="case-metric-num">15min</div><div class="case-metric-label">Alert Response</div></div>
+        </section>
+        <footer>
+          <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+          <div class="footer-right">
+            <a class="footer-link" onclick="navigate('contact')">Contact</a>
+          </div>
+        </footer>
+      </div>
+
+      <!-- =================== WORK =================== -->
+      <div class="page" id="page-work">
+        <section class="section">
+          <div class="max-w">
+            <div class="work-header fade-in">
+              <div>
+                <div class="section-label">All Projects</div>
+                <h2 class="section-title">50+ <em>Projects</em>
+                </h2>
+              </div>
+              <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterProjects('all',this)">All</button>
+                <button class="filter-tab" onclick="filterProjects('vision',this)">Vision AI</button>
+                <button class="filter-tab" onclick="filterProjects('mfg',this)">Manufacturing</button>
+                <button class="filter-tab" onclick="filterProjects('enterprise',this)">Enterprise</button>
+                <button class="filter-tab" onclick="filterProjects('management',this)">Management</button>
+              </div>
+            </div>
+            <div class="projects-grid" id="projectsGrid"></div>
+          </div>
+        </section>
+        <footer>
+          <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+          <div class="footer-right">
+            <a class="footer-link" onclick="navigate('contact')">Contact</a>
+          </div>
+        </footer>
+      </div>
+
+      <!-- =================== CASE STUDIES =================== -->
+      <div class="page" id="page-cases">
+        <section class="section">
+          <div class="max-w">
+            <div class="fade-in" style="margin-bottom:3rem">
+              <div class="section-label">Deep Dives</div>
+              <h2 class="section-title">Case <em>Studies</em>
+              </h2>
+              <p class="section-subtitle">Four flagship enterprise products — each representing months of research, iteration and cross-functional collaboration.</p>
+            </div>
+            <div class="case-studies-grid">
+              <div class="case-card fade-in" onclick="openModal('mm')">
+                <div class="case-visual">
+                  <div class="case-visual-bg"></div>
+                  <div class="case-visual-inner">
+                    <div class="case-icon">📦</div>
+                    <div class="case-product-label">MM Platform</div>
+                  </div>
+                </div>
+                <div class="case-body">
+                  <div class="case-label">Case Study 01</div>
+                  <h3 class="case-title">Material Management System</h3>
+                  <div class="case-subtitle">End-to-end supply chain UX for Tier-1 auto suppliers</div>
+                  <p class="case-desc">Redesigned the entire material requisition, tracking and delivery experience for a platform managing ₹200Cr+ in daily material flow. Reduced procurement errors by 40% and cut operator task time by 35%.</p>
+                  <div class="case-chips">
+                    <span class="tag">User Research</span>
+                    <span class="tag">Information Architecture</span>
+                    <span class="tag">Design System</span>
+                    <span class="tag">Usability Testing</span>
+                  </div>
+                  <div class="case-metrics">
+                    <div>
+                      <div class="case-metric-num">40%</div>
+                      <div class="case-metric-label">Error Reduction</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">35%</div>
+                      <div class="case-metric-label">Task Time ↓</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">98%</div>
+                      <div class="case-metric-label">Adoption Rate</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="case-card fade-in" onclick="openModal('cmms')">
+                <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-950),var(--blue-800))">
+                  <div class="case-visual-bg"></div>
+                  <div class="case-visual-inner">
+                    <div class="case-icon">🔧</div>
+                    <div class="case-product-label">CMMS</div>
+                  </div>
+                </div>
+                <div class="case-body">
+                  <div class="case-label">Case Study 02</div>
+                  <h3 class="case-title">Computerised Maintenance Management</h3>
+                  <div class="case-subtitle">Proactive asset intelligence for industrial plants</div>
+                  <p class="case-desc">Designed a zero-to-one CMMS covering work orders, preventive maintenance scheduling, spare parts inventory and technician workflows — replacing paper-based systems across 5 plants.</p>
+                  <div class="case-chips">
+                    <span class="tag">Service Design</span>
+                    <span class="tag">Mobile-first</span>
+                    <span class="tag">IoT Dashboards</span>
+                    <span class="tag">Offline UX</span>
+                  </div>
+                  <div class="case-metrics">
+                    <div>
+                      <div class="case-metric-num">60%</div>
+                      <div class="case-metric-label">Downtime ↓</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">5</div>
+                      <div class="case-metric-label">Plants Deployed</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">3×</div>
+                      <div class="case-metric-label">MTTR Improvement</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="case-card fade-in" onclick="openModal('ems')">
+                <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-900),var(--blue-700))">
+                  <div class="case-visual-bg"></div>
+                  <div class="case-visual-inner">
+                    <div class="case-icon">⚡</div>
+                    <div class="case-product-label">EMS</div>
+                  </div>
+                </div>
+                <div class="case-body">
+                  <div class="case-label">Case Study 03</div>
+                  <h3 class="case-title">Energy Management System</h3>
+                  <div class="case-subtitle">Real-time energy intelligence for manufacturing sites</div>
+                  <p class="case-desc">Built an EMS product from discovery to launch — live consumption dashboards, zone-level anomaly detection, sustainability reporting and cost allocation analytics for factory management.</p>
+                  <div class="case-chips">
+                    <span class="tag">Data Visualisation</span>
+                    <span class="tag">Real-time UX</span>
+                    <span class="tag">Executive Dashboards</span>
+                    <span class="tag">Alert Systems</span>
+                  </div>
+                  <div class="case-metrics">
+                    <div>
+                      <div class="case-metric-num">22%</div>
+                      <div class="case-metric-label">Energy Savings</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">8</div>
+                      <div class="case-metric-label">Sites Active</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">15min</div>
+                      <div class="case-metric-label">Alert Response</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="case-card fade-in" onclick="openModal('fr')">
+                <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-800),var(--blue-600))">
+                  <div class="case-visual-bg"></div>
+                  <div class="case-visual-inner">
+                    <div class="case-icon">🎯</div>
+                    <div class="case-product-label">FR System</div>
+                  </div>
+                </div>
+                <div class="case-body">
+                  <div class="case-label">Case Study 04</div>
+                  <h3 class="case-title">Failure Reporting & Analytics</h3>
+                  <div class="case-subtitle">RCA-driven quality intelligence platform</div>
+                  <p class="case-desc">Designed an end-to-end failure reporting platform with guided RCA workflows, Pareto-based analytics, CAPA tracking and cross-plant failure pattern intelligence for quality teams.</p>
+                  <div class="case-chips">
+                    <span class="tag">Workflow Design</span>
+                    <span class="tag">Analytics UX</span>
+                    <span class="tag">Quality Systems</span>
+                    <span class="tag">Root Cause Analysis</span>
+                  </div>
+                  <div class="case-metrics">
+                    <div>
+                      <div class="case-metric-num">55%</div>
+                      <div class="case-metric-label">RCA Time ↓</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">100%</div>
+                      <div class="case-metric-label">Digital Shift</div>
+                    </div>
+                    <div>
+                      <div class="case-metric-num">4.7★</div>
+                      <div class="case-metric-label">User Rating</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="case-card fade-in" onclick="openModal('fr')">
-          <div class="case-visual" style="background:linear-gradient(145deg,var(--blue-800),var(--blue-600))"><div class="case-visual-bg"></div><div class="case-visual-inner"><div class="case-icon">🎯</div><div class="case-product-label">FR System</div></div></div>
-          <div class="case-body">
-            <div class="case-label">Case Study 04</div>
-            <h3 class="case-title">Failure Reporting & Analytics</h3>
-            <div class="case-subtitle">RCA-driven quality intelligence platform</div>
-            <p class="case-desc">Designed an end-to-end failure reporting platform with guided RCA workflows, Pareto-based analytics, CAPA tracking and cross-plant failure pattern intelligence for quality teams.</p>
-            <div class="case-chips"><span class="tag">Workflow Design</span><span class="tag">Analytics UX</span><span class="tag">Quality Systems</span><span class="tag">Root Cause Analysis</span></div>
-            <div class="case-metrics">
-              <div><div class="case-metric-num">55%</div><div class="case-metric-label">RCA Time ↓</div></div>
-              <div><div class="case-metric-num">100%</div><div class="case-metric-label">Digital Shift</div></div>
-              <div><div class="case-metric-num">4.7★</div><div class="case-metric-label">User Rating</div></div>
+        </section>
+        <footer>
+          <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+          <div class="footer-right">
+            <a class="footer-link" onclick="navigate('contact')">Contact</a>
+          </div>
+        </footer>
+      </div>
+
+      <!-- =================== SKILLS =================== -->
+      <div class="page" id="page-skills">
+        <section class="section">
+          <div class="max-w">
+            <div class="fade-in" style="margin-bottom:3rem">
+              <div class="section-label">Capabilities</div>
+              <h2 class="section-title">Skills & <em>Tools</em>
+              </h2>
+            </div>
+            <div class="skills-layout">
+              <div class="skills-group fade-in">
+                <div class="skills-group-title">Design</div>
+                <div class="skill-item">
+                  <span class="skill-name">Product Design</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">UI/UX Design</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Design Systems</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Interaction Design</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Information Architecture</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Visual Design</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Motion Design</span>
+                  <span class="skill-level">Intermediate</span>
+                </div>
+              </div>
+              <div class="skills-group fade-in" style="transition-delay:0.08s">
+                <div class="skills-group-title">Research & Strategy</div>
+                <div class="skill-item">
+                  <span class="skill-name">User Research</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Usability Testing</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Product Strategy</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Journey Mapping</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Competitive Analysis</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Stakeholder Management</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+              </div>
+              <div class="skills-group fade-in" style="transition-delay:0.14s">
+                <div class="skills-group-title">Domain Expertise</div>
+                <div class="skill-item">
+                  <span class="skill-name">Manufacturing / Industrial IoT</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Vision Inspection Systems</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">CMMS / EMS Platforms</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Automotive Tier-1</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Food & Beverage</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">ANPR / Security Systems</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+              </div>
+              <div class="skills-group fade-in" style="transition-delay:0.2s">
+                <div class="skills-group-title">Technical</div>
+                <div class="skill-item">
+                  <span class="skill-name">HTML / CSS</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Framer</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Prototyping</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Design Handoff</span>
+                  <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">API Understanding</span>
+                  <span class="skill-level">Intermediate</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-name">Data Visualisation</span>
+                  <span class="skill-level">Advanced</span>
+                </div>
+              </div>
+            </div>
+            <div class="tools-grid">
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">🎨</div>
+                <div class="tool-chip-name">Figma</div>
+                <div class="tool-chip-type">Design & Prototype</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">⚡</div>
+                <div class="tool-chip-name">Framer</div>
+                <div class="tool-chip-type">No-code Builder</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">🖼️</div>
+                <div class="tool-chip-name">Adobe XD</div>
+                <div class="tool-chip-type">Design</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">📊</div>
+                <div class="tool-chip-name">Miro</div>
+                <div class="tool-chip-type">Collaboration</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">📋</div>
+                <div class="tool-chip-name">Notion</div>
+                <div class="tool-chip-type">Documentation</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">🔬</div>
+                <div class="tool-chip-name">Maze</div>
+                <div class="tool-chip-type">User Testing</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">📁</div>
+                <div class="tool-chip-name">Zeplin</div>
+                <div class="tool-chip-type">Handoff</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">🧩</div>
+                <div class="tool-chip-name">Storybook</div>
+                <div class="tool-chip-type">Design Systems</div>
+              </div>
+              <div class="tool-chip fade-in">
+                <div class="tool-chip-icon">📈</div>
+                <div class="tool-chip-name">Mixpanel</div>
+                <div class="tool-chip-type">Analytics</div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+        <footer>
+          <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+          <div class="footer-right">
+            <a class="footer-link" onclick="navigate('contact')">Contact</a>
+          </div>
+        </footer>
       </div>
-    </div>
-  </section>
-  <footer>
-    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
-    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
-  </footer>
-</div>
 
-<!-- =================== SKILLS =================== -->
-<div class="page" id="page-skills">
-  <section class="section">
-    <div class="max-w">
-      <div class="fade-in" style="margin-bottom:3rem">
-        <div class="section-label">Capabilities</div>
-        <h2 class="section-title">Skills & <em>Tools</em></h2>
-      </div>
-      <div class="skills-layout">
-        <div class="skills-group fade-in">
-          <div class="skills-group-title">Design</div>
-          <div class="skill-item"><span class="skill-name">Product Design</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">UI/UX Design</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Design Systems</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Interaction Design</span><span class="skill-level">Advanced</span></div>
-          <div class="skill-item"><span class="skill-name">Information Architecture</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Visual Design</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Motion Design</span><span class="skill-level">Intermediate</span></div>
-        </div>
-        <div class="skills-group fade-in" style="transition-delay:0.08s">
-          <div class="skills-group-title">Research & Strategy</div>
-          <div class="skill-item"><span class="skill-name">User Research</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Usability Testing</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Product Strategy</span><span class="skill-level">Advanced</span></div>
-          <div class="skill-item"><span class="skill-name">Journey Mapping</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Competitive Analysis</span><span class="skill-level">Advanced</span></div>
-          <div class="skill-item"><span class="skill-name">Stakeholder Management</span><span class="skill-level">Advanced</span></div>
-        </div>
-        <div class="skills-group fade-in" style="transition-delay:0.14s">
-          <div class="skills-group-title">Domain Expertise</div>
-          <div class="skill-item"><span class="skill-name">Manufacturing / Industrial IoT</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Vision Inspection Systems</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">CMMS / EMS Platforms</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Automotive Tier-1</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Food & Beverage</span><span class="skill-level">Advanced</span></div>
-          <div class="skill-item"><span class="skill-name">ANPR / Security Systems</span><span class="skill-level">Advanced</span></div>
-        </div>
-        <div class="skills-group fade-in" style="transition-delay:0.2s">
-          <div class="skills-group-title">Technical</div>
-          <div class="skill-item"><span class="skill-name">HTML / CSS</span><span class="skill-level">Advanced</span></div>
-          <div class="skill-item"><span class="skill-name">Framer</span><span class="skill-level">Advanced</span></div>
-          <div class="skill-item"><span class="skill-name">Prototyping</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">Design Handoff</span><span class="skill-level">Expert</span></div>
-          <div class="skill-item"><span class="skill-name">API Understanding</span><span class="skill-level">Intermediate</span></div>
-          <div class="skill-item"><span class="skill-name">Data Visualisation</span><span class="skill-level">Advanced</span></div>
-        </div>
-      </div>
-      <div class="tools-grid">
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">🎨</div><div class="tool-chip-name">Figma</div><div class="tool-chip-type">Design & Prototype</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">⚡</div><div class="tool-chip-name">Framer</div><div class="tool-chip-type">No-code Builder</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">🖼️</div><div class="tool-chip-name">Adobe XD</div><div class="tool-chip-type">Design</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">📊</div><div class="tool-chip-name">Miro</div><div class="tool-chip-type">Collaboration</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">📋</div><div class="tool-chip-name">Notion</div><div class="tool-chip-type">Documentation</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">🔬</div><div class="tool-chip-name">Maze</div><div class="tool-chip-type">User Testing</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">📁</div><div class="tool-chip-name">Zeplin</div><div class="tool-chip-type">Handoff</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">🧩</div><div class="tool-chip-name">Storybook</div><div class="tool-chip-type">Design Systems</div></div>
-        <div class="tool-chip fade-in"><div class="tool-chip-icon">📈</div><div class="tool-chip-name">Mixpanel</div><div class="tool-chip-type">Analytics</div></div>
-      </div>
-    </div>
-  </section>
-  <footer>
-    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
-    <div class="footer-right"><a class="footer-link" onclick="navigate('contact')">Contact</a></div>
-  </footer>
-</div>
-
-<!-- =================== CONTACT =================== -->
-<div class="page" id="page-contact">
-  <section class="section">
-    <div class="max-w">
-      <div class="fade-in" style="margin-bottom:3rem">
-        <div class="section-label">Let's Talk</div>
-        <h2 class="section-title">Start a <em>conversation</em></h2>
-        <p class="section-subtitle">Open to full-time product design roles, consulting and speaking in industrial UX and enterprise product design.</p>
-      </div>
-      <div class="contact-grid">
-        <div class="fade-in">
-          <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-value">hello@productdesigner.in</div></div></div>
-          <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-value">India · Open to Remote</div></div></div>
-          <div class="contact-detail"><div class="contact-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-value">linkedin.com/in/productdesigner</div></div></div>
-          <div class="contact-detail"><div class="contact-icon">🎨</div><div><div class="contact-label">Behance / Dribbble</div><div class="contact-value">@productdesigner</div></div></div>
-          <div style="margin-top:2rem;padding:1.4rem;background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:var(--radius-lg);">
-            <div class="section-label" style="margin-bottom:0.65rem;">Availability</div>
-            <div style="display:flex;align-items:center;gap:0.7rem;">
-              <div class="pulse-dot"></div>
-              <div style="font-size:0.86rem;color:var(--text-secondary);">Available for new opportunities from Q1 2026</div>
+      <!-- =================== CONTACT =================== -->
+      <div class="page" id="page-contact">
+        <section class="section">
+          <div class="max-w">
+            <div class="fade-in" style="margin-bottom:3rem">
+              <div class="section-label">Let's Talk</div>
+              <h2 class="section-title">Start a <em>conversation</em>
+              </h2>
+              <p class="section-subtitle">Open to full-time product design roles, consulting and speaking in industrial UX and enterprise product design.</p>
+            </div>
+            <div class="contact-grid">
+              <div class="fade-in">
+                <div class="contact-detail">
+                  <div class="contact-icon">✉️</div>
+                  <div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">hello@productdesigner.in</div>
+                  </div>
+                </div>
+                <div class="contact-detail">
+                  <div class="contact-icon">📍</div>
+                  <div>
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">India · Open to Remote</div>
+                  </div>
+                </div>
+                <div class="contact-detail">
+                  <div class="contact-icon">💼</div>
+                  <div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">linkedin.com/in/productdesigner</div>
+                  </div>
+                </div>
+                <div class="contact-detail">
+                  <div class="contact-icon">🎨</div>
+                  <div>
+                    <div class="contact-label">Behance / Dribbble</div>
+                    <div class="contact-value">@productdesigner</div>
+                  </div>
+                </div>
+                <div style="margin-top:2rem;padding:1.4rem;background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:var(--radius-lg);">
+                  <div class="section-label" style="margin-bottom:0.65rem;">Availability</div>
+                  <div style="display:flex;align-items:center;gap:0.7rem;">
+                    <div class="pulse-dot"></div>
+                    <div style="font-size:0.86rem;color:var(--text-secondary);"> Available for new opportunities from Q1 2026</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contact-form fade-in" style="transition-delay:0.1s">
+                <div class="form-group">
+                  <label class="form-label">Your Name</label>
+                  <input class="form-input" type="text" placeholder="Your name"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input class="form-input" type="email" placeholder="your@email.com"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Subject</label>
+                  <input class="form-input" type="text" placeholder="Project Inquiry / Role Opportunity"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Message</label>
+                  <textarea class="form-textarea" placeholder="Tell me about your project or opportunity…"></textarea>
+                </div>
+                <button class="btn-primary" style="width:100%;margin-top:0.25rem;">Send Message →</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="contact-form fade-in" style="transition-delay:0.1s">
-          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Your name"/></div>
-          <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="your@email.com"/></div>
-          <div class="form-group"><label class="form-label">Subject</label><input class="form-input" type="text" placeholder="Project Inquiry / Role Opportunity"/></div>
-          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or opportunity…"></textarea></div>
-          <button class="btn-primary" style="width:100%;margin-top:0.25rem;">Send Message →</button>
+        </section>
+        <footer>
+          <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
+          <div class="footer-right">
+            <a class="footer-link" onclick="navigate('home')">Home</a>
+            <a class="footer-link" onclick="navigate('work')">Work</a>
+          </div>
+        </footer>
+      </div>
+
+      <!-- MODAL -->
+      <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+        <div class="modal">
+          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div id="modalBody"></div>
         </div>
       </div>
-    </div>
-  </section>
-  <footer>
-    <div class="footer-left">© 2025 Product Designer & UI/UX Lead</div>
-    <div class="footer-right"><a class="footer-link" onclick="navigate('home')">Home</a><a class="footer-link" onclick="navigate('work')">Work</a></div>
-  </footer>
-</div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
-  <div class="modal"><button class="modal-close" onclick="closeModal()">✕</button><div id="modalBody"></div></div>
-</div>
-
-<script>
+      <script>
 // NAVIGATION
-function navigate(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+function navigate(page){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
   const pg=document.getElementById('page-'+page);
   if(pg)pg.classList.add('active');
@@ -676,10 +1123,13 @@ function navigate(page){
 
 // THEME
 function toggleTheme(){
-  const html=document.documentElement;
-  const isDark=html.dataset.theme==='dark';
-  html.dataset.theme=isDark?'light':'dark';
-  document.getElementById('themeLabel').textContent=isDark?'Light':'Dark';
+  const html = document.documentElement;
+  const isDark = html.dataset.theme === 'dark';
+
+  html.dataset.theme = isDark ? 'light' : 'dark';
+
+  document.getElementById('themeLabel').textContent =
+    html.dataset.theme === 'light' ? 'Light' : 'Dark';
 }
 
 // PROJECTS
@@ -702,24 +1152,24 @@ const projects=[
 
 function renderProjects(filter='all'){
   const grid=document.getElementById('projectsGrid');
-  const filtered=filter==='all'?projects:projects.filter(p=>p.cat===filter);
-  grid.innerHTML=filtered.map((p,i)=>`
-    <div class="project-card fade-in" style="transition-delay:${(i%3)*0.06}s" onclick="openProjectModal('${p.id}')">
-      <div class="project-thumb" ${p.gradient?`style="background:${p.gradient}"`:''}><div class="project-thumb-lines"></div><div class="project-thumb-icon">${p.icon}</div></div>
-      <div class="project-body">
-        <div class="project-category">${p.catLabel}</div>
-        <div class="project-name">${p.name}</div>
-        <div class="project-desc">${p.desc}</div>
-        <div class="project-meta">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+  const filtered=filter==='all'?projects:projects.filter(p=>p.cat===filter); grid.innerHTML=filtered.map((p,i)=>`
+        <div class="project-card fade-in" style="transition-delay:${(i%3)*0.06}s" onclick="openProjectModal('${p.id}')">
+          <div class="project-thumb" ${p.gradient?`style="background:${p.gradient}"`:''}><div class="project-thumb-lines"></div>
+          <div class="project-thumb-icon">${p.icon}</div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">${p.catLabel}</div>
+          <div class="project-name">${p.name}</div>
+          <div class="project-desc">${p.desc}</div>
+          <div class="project-meta">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="project-arrow">→</div>
       </div>
-      <div class="project-arrow">→</div>
-    </div>
   `).join('');
   observeFadeIns();
 }
 
-function filterProjects(filter,btn){
-  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+function filterProjects(filter,btn){ document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderProjects(filter);
 }
@@ -733,25 +1183,26 @@ const caseData={
 };
 
 function openModal(id){
-  const d=caseData[id];if(!d)return;
-  document.getElementById('modalBody').innerHTML=`
-    <div class="modal-product">${d.product}</div>
-    <div class="modal-title">${d.title}</div>
-    <div class="modal-sub">${d.sub}</div>
-    <div class="modal-section-title">The Problem</div>
-    <p class="modal-text">${d.problem}</p>
-    <div class="modal-section-title">Design Approach</div>
-    <p class="modal-text">${d.solution}</p>
-    <div class="modal-section-title">Outcomes</div>
-    <p class="modal-text">${d.outcome}</p>
-    <div class="modal-outcomes">${d.outcomes.map(o=>`<div class="modal-outcome"><div class="modal-outcome-num">${o.n}</div><div class="modal-outcome-label">${o.l}</div></div>`).join('')}</div>
+  const d=caseData[id];if(!d)return; document.getElementById('modalBody').innerHTML=`
+      <div class="modal-product">${d.product}</div>
+      <div class="modal-title">${d.title}</div>
+      <div class="modal-sub">${d.sub}</div>
+      <div class="modal-section-title">The Problem</div>
+      <p class="modal-text">${d.problem}</p>
+      <div class="modal-section-title">Design Approach</div>
+      <p class="modal-text">${d.solution}</p>
+      <div class="modal-section-title">Outcomes</div>
+      <p class="modal-text">${d.outcome}</p>
+      <div class="modal-outcomes">${d.outcomes.map(o=>`<div class="modal-outcome">
+        <div class="modal-outcome-num">${o.n}</div>
+        <div class="modal-outcome-label">${o.l}</div>
+      </div>`).join('')}</div>
   `;
   document.getElementById('modalOverlay').classList.add('open');
 }
 
 function openProjectModal(id){
-  const p=projects.find(x=>x.id===id);if(!p)return;
-  document.getElementById('modalBody').innerHTML=`
+  const p=projects.find(x=>x.id===id);if(!p)return; document.getElementById('modalBody').innerHTML=`
     <div class="modal-product">${p.catLabel}</div>
     <div class="modal-title">${p.name}</div>
     <div class="modal-sub">Product Design & UI/UX · End-to-end ownership</div>
@@ -769,16 +1220,11 @@ function closeModalOnBg(e){if(e.target.id==='modalOverlay')closeModal();}
 
 // INTERSECTION OBSERVER
 function observeFadeIns(){
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-  },{threshold:0.08});
-  document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>obs.observe(el));
+  const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08}); document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>obs.observe(el));
 }
 
-// INIT
-renderProjects();
-observeFadeIns();
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-</script>
+// INIT renderProjects(); observeFadeIns(); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+  </script>
 </body>
 </html>
